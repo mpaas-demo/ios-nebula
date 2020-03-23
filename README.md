@@ -27,7 +27,7 @@ sh <(curl -s http://mpaas-ios.oss-cn-hangzhou.aliyuncs.com/cocoapods/installmPaa
 
 3. 执行以下命令，拉取依赖库
 ```shell
-1、pod mpaas update all
+1、pod mpaas update --all
 2、pod update
 ```
 
@@ -40,9 +40,7 @@ curl -sSL https://mpaas-ios.oss-cn-hangzhou.aliyuncs.com/mpaaskit/Xcode-extensio
 ```
 
 2. 点击 “Xcode - Editor - mPaaS - 编辑工程 ” 打开插件面板，切换到“工程概览” TAB，点击安装按钮，拉取依赖
-
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2020/png/271/1584697775625-1dd4eddb-a546-47e7-936d-64bf47d3869c.png#align=left&display=inline&height=301&name=image.png&originHeight=1202&originWidth=1800&size=572760&status=done&style=none&width=450)
 
 3. 此 demo 默认为 10.1.60基线，您可以切换到 “升级基线” Tab，选择需要的基线
-
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2020/png/271/1584697976214-dcac8f48-58ad-4d74-9f32-cc65a6825780.png#align=left&display=inline&height=301&name=image.png&originHeight=1202&originWidth=1800&size=649170&status=done&style=none&width=450)
