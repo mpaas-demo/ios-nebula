@@ -44,3 +44,5 @@ curl -sSL https://mpaas-ios.oss-cn-hangzhou.aliyuncs.com/mpaaskit/Xcode-extensio
 
 3. 此 demo 默认为 10.1.60基线，您可以切换到 “升级基线” Tab，选择需要的基线
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2020/png/271/1584697976214-dcac8f48-58ad-4d74-9f32-cc65a6825780.png#align=left&display=inline&height=301&name=image.png&originHeight=1202&originWidth=1800&size=649170&status=done&style=none&width=450)
+
+## 运行效果

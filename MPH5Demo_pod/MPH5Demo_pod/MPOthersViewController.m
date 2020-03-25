@@ -61,7 +61,7 @@
 
 - (void)openHtml {
     NSString *path = [[NSBundle mainBundle].bundlePath stringByAppendingFormat:@"/%@", @"H52Native.html"];
-//    path = [NSString stringWithFormat:@"file://%@", path];
+    path = [NSString stringWithFormat:@"file://%@", path];
     if ([path length] > 0) {
         [[MPNebulaAdapterInterface shareInstance] startH5ViewControllerWithParams:@{@"url": path, @"showOptionMenu":@NO}];
     }

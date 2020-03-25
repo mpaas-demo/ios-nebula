@@ -37,6 +37,7 @@
 		44AA6E7F23029887002FFDB8 /* MPPlugin4WebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA6E7E23029887002FFDB8 /* MPPlugin4WebView.m */; };
 		44AA6E9423029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA6E9023029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.m */; };
 		44AA6E9523029992002FFDB8 /* AUThemeManager+CGBThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA6E9123029992002FFDB8 /* AUThemeManager+CGBThemeManager.m */; };
+		44F5526E242A266C00081F7A /* MPH5WKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F5526D242A266C00081F7A /* MPH5WKWebView.m */; };
 		47B0FA69C8D6844814C91B2E /* DTFrameworkInterface+MPH5Demo_pod.m in Sources */ = {isa = PBXBuildFile; fileRef = 86517593E5F25A3A727D7846 /* DTFrameworkInterface+MPH5Demo_pod.m */; };
 		4DAD9E2C2A1168457E1AF828 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC023BB6443B3DCB25980F62 /* CoreMotion.framework */; };
 		4F82DD436C0603A79EBBE729 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B86E1CE0CC96A529EA0E17E4 /* DemoViewController.m */; };
@@ -104,6 +105,8 @@
 		44AA6E9123029992002FFDB8 /* AUThemeManager+CGBThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AUThemeManager+CGBThemeManager.m"; sourceTree = "<group>"; };
 		44AA6E9223029992002FFDB8 /* AUThemeManager+CGBThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUThemeManager+CGBThemeManager.h"; sourceTree = "<group>"; };
 		44AA6E9323029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUBarButtonItem+CGBBarButtonItem.h"; sourceTree = "<group>"; };
+		44F5526C242A266C00081F7A /* MPH5WKWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPH5WKWebView.h; sourceTree = "<group>"; };
+		44F5526D242A266C00081F7A /* MPH5WKWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPH5WKWebView.m; sourceTree = "<group>"; };
 		516D3DE2F22BDC1191C9EEC7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		53C6A5B62CCD93D756BAB5E7 /* MPH5Demo_pod-Prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MPH5Demo_pod-Prefix.pch"; path = "../../../MPH5Demo_pod/MPH5Demo_pod-Prefix.pch"; sourceTree = "<group>"; };
 		56DE0432DA2E52646D896161 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
@@ -174,6 +177,8 @@
 			children = (
 				1688B476F5195C8E176943C0 /* DTFrameworkInterface+MPH5Demo_pod.h */,
 				86517593E5F25A3A727D7846 /* DTFrameworkInterface+MPH5Demo_pod.m */,
+				44F5526C242A266C00081F7A /* MPH5WKWebView.h */,
+				44F5526D242A266C00081F7A /* MPH5WKWebView.m */,
 				44AA6E9323029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.h */,
 				44AA6E9023029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.m */,
 				44AA6E9223029992002FFDB8 /* AUThemeManager+CGBThemeManager.h */,
@@ -482,6 +487,7 @@
 				44AA6E7F23029887002FFDB8 /* MPPlugin4WebView.m in Sources */,
 				A8F2C312A8BB3CD02A60CE76 /* TestDemoViewController.m in Sources */,
 				4F82DD436C0603A79EBBE729 /* DemoViewController.m in Sources */,
+				44F5526E242A266C00081F7A /* MPH5WKWebView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +631,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NWNC46252S;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MPH5Demo_pod/MPH5Demo_pod-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -649,6 +657,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NWNC46252S;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MPH5Demo_pod/MPH5Demo_pod-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

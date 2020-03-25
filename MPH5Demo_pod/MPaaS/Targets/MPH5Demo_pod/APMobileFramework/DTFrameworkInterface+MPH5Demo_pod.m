@@ -7,6 +7,7 @@
 
 #import "DTFrameworkInterface+MPH5Demo_pod.h"
 #import "MPH5WebViewController.h"
+#import "MPH5WKWebView.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
@@ -62,10 +63,11 @@
 {
     // 定制容器
     [MPNebulaAdapterInterface shareInstance].nebulaVeiwControllerClass = [MPH5WebViewController class]; //设置H5容器基类
+    [MPNebulaAdapterInterface shareInstance].nebulaWebViewClass = [MPH5WKWebView class];
     [MPNebulaAdapterInterface shareInstance].nebulaUserAgent = @"mPaaS/Portal";//设置H5容器UserAgent
     [MPNebulaAdapterInterface shareInstance].nebulaUseWKArbitrary = YES; //开启 WKWebview
     [MPNebulaAdapterInterface shareInstance].nebulaCommonResourceAppList = @[@"77777777"];// 设置全局资源包
-    [MPNebulaAdapterInterface shareInstance].nebulaNeedVerify = NO; // 关闭离线包验签，正式版本请开启验签s
+    [MPNebulaAdapterInterface shareInstance].nebulaNeedVerify = NO; // 关闭离线包验签，正式版本请开启验签
     
     // 更新离线包
     [[MPNebulaAdapterInterface shareInstance] requestAllNebulaApps:^(NSDictionary *data, NSError *error) {
