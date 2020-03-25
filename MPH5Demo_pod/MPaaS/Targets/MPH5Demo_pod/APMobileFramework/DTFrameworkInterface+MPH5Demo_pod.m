@@ -8,6 +8,7 @@
 #import "DTFrameworkInterface+MPH5Demo_pod.h"
 #import "MPH5WebViewController.h"
 #import "MPH5WKWebView.h"
+#import "MPBootLoaderImpl.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
@@ -73,6 +74,24 @@
     [[MPNebulaAdapterInterface shareInstance] requestAllNebulaApps:^(NSDictionary *data, NSError *error) {
         NSLog(@"[mpaas] nebula rpc data :%@", data);
     }];
+}
+
+#pragma mark 非框架托管配置
+- (DTBootLoader *)bootLoader {
+    static MPBootLoaderImpl *_bootLoader;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _bootLoader = [[MPBootLoaderImpl alloc] init];
+    });
+    return _bootLoader;
+}
+
+- (BOOL)shouldWindowMakeVisable {
+    return NO;
+}
+
+- (BOOL)shouldShowLauncher {
+    return NO;
 }
 
 @end
