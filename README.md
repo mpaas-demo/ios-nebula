@@ -11,6 +11,10 @@
 
 <br />本 Demo 支持的基线范围：>= 10.1.60（默认使用 10.1.60）。<br />
 
+## 分支说明
+- `master`：mPaaS框架托管方式。适用于新建一个 mPaaS 工程的场景。
+- `none_mpaas_framework`：非 mPaaS 框架托管方式。适用于已有工程接入 H5 容器和离线包的场景，详情请参考 [初始化 - 非框架托管](https://help.aliyun.com/document_detail/112873.html?spm=a2c4g.11186623.6.1033.56694bdch2yOYL#h2-u521Du59CBu5316u5BB9u56681)
+
 <a name="jFPNB"></a>
 ## 运行Demo
 <a name="teHcF"></a>

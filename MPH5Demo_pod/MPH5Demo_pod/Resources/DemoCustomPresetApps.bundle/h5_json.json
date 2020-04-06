@@ -1,0 +1,30 @@
+{
+	"config":{
+		"updateReqRate":16400,
+		"limitReqRate":13600,
+		"appPoolLimit":3,
+		"versionRefreshRate":86400
+	},
+	"data":[
+		{
+			"app_desc":"svg测试",
+			"app_id":"00010001",
+			"auto_install":1,
+			"fallback_base_url":"https://mcube-prod.oss-cn-hangzhou.aliyuncs.com/570DA89281533-default/00010001/1.0.0.0_all/nebula/fallback/",
+			"global_pack_url":"",
+			"icon_url":"",
+			"installType":1,
+			"main_url":"/www/AgreePluginTest.html",
+			"name":"svg测试",
+			"online":1,
+			"package_url":"https://mcube-prod.oss-cn-hangzhou.aliyuncs.com/570DA89281533-default/00010001/1.0.0.0_all/nebula/00010001_1.0.0.0.amr",
+			"patch":"",
+			"sub_url":"",
+			"version":"1.0.0.0",
+			"vhost":"https://00010001.h5app.com"
+		}
+	],
+	"resultCode":100,
+	"resultMsg":"操作成功",
+	"state":"success"
+}

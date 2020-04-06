@@ -68,6 +68,6 @@
 }
 
 - (void)openPresetPackage {
-    [[MPNebulaAdapterInterface shareInstance] startH5ViewControllerWithNebulaApp:@{@"appId":@"00025000"}];
+    [[MPNebulaAdapterInterface shareInstance] startH5ViewControllerWithNebulaApp:@{@"appId":@"00010001"}];
 }
 @end
