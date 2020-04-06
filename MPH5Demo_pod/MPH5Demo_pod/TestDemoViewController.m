@@ -9,6 +9,7 @@
 #import "TestDemoViewController.h"
 #import "MPNebulaViewController.h"
 #import "MPOthersViewController.h"
+#import "MPParamsViewController.h"
 
 @interface TestDemoViewController ()
 
@@ -47,9 +48,16 @@
     UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
     button3.frame = CGRectOffset(button2.frame, 0, 80);
     button3.backgroundColor = [UIColor blueColor];
-    [button3 setTitle:@"其他功能" forState:UIControlStateNormal];
-    [button3 addTarget:self action:@selector(otherFunction) forControlEvents:UIControlEventTouchUpInside];
+    [button3 setTitle:@"H5页面传递自定义参数" forState:UIControlStateNormal];
+    [button3 addTarget:self action:@selector(transportParams) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button3];
+    
+    UIButton *button4 = [UIButton buttonWithType:UIButtonTypeCustom];
+    button4.frame = CGRectOffset(button3.frame, 0, 80);
+    button4.backgroundColor = [UIColor blueColor];
+    [button4 setTitle:@"其他功能" forState:UIControlStateNormal];
+    [button4 addTarget:self action:@selector(otherFunction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button4];
 }
 
 - (void)openOnline {
@@ -65,6 +73,12 @@
 - (void)customJsApi
 {
     [[MPNebulaAdapterInterface shareInstance] startH5ViewControllerWithNebulaApp:@{@"appId":@"70000000"}];
+}
+
+- (void)transportParams
+{
+    MPParamsViewController *vc = [[MPParamsViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)otherFunction

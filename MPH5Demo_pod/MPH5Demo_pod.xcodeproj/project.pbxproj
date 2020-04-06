@@ -37,6 +37,7 @@
 		44AA6E7F23029887002FFDB8 /* MPPlugin4WebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA6E7E23029887002FFDB8 /* MPPlugin4WebView.m */; };
 		44AA6E9423029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA6E9023029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.m */; };
 		44AA6E9523029992002FFDB8 /* AUThemeManager+CGBThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA6E9123029992002FFDB8 /* AUThemeManager+CGBThemeManager.m */; };
+		44BB7F64243B0B6D00398948 /* MPParamsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BB7F63243B0B6D00398948 /* MPParamsViewController.m */; };
 		44F5526E242A266C00081F7A /* MPH5WKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F5526D242A266C00081F7A /* MPH5WKWebView.m */; };
 		47B0FA69C8D6844814C91B2E /* DTFrameworkInterface+MPH5Demo_pod.m in Sources */ = {isa = PBXBuildFile; fileRef = 86517593E5F25A3A727D7846 /* DTFrameworkInterface+MPH5Demo_pod.m */; };
 		4DAD9E2C2A1168457E1AF828 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC023BB6443B3DCB25980F62 /* CoreMotion.framework */; };
@@ -105,6 +106,8 @@
 		44AA6E9123029992002FFDB8 /* AUThemeManager+CGBThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AUThemeManager+CGBThemeManager.m"; sourceTree = "<group>"; };
 		44AA6E9223029992002FFDB8 /* AUThemeManager+CGBThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUThemeManager+CGBThemeManager.h"; sourceTree = "<group>"; };
 		44AA6E9323029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUBarButtonItem+CGBBarButtonItem.h"; sourceTree = "<group>"; };
+		44BB7F62243B0B6C00398948 /* MPParamsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPParamsViewController.h; path = ../../MPH5Demo_plugin/MPH5Demo_plugin/Sources/MPParamsViewController.h; sourceTree = "<group>"; };
+		44BB7F63243B0B6D00398948 /* MPParamsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPParamsViewController.m; path = ../../MPH5Demo_plugin/MPH5Demo_plugin/Sources/MPParamsViewController.m; sourceTree = "<group>"; };
 		44F5526C242A266C00081F7A /* MPH5WKWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPH5WKWebView.h; sourceTree = "<group>"; };
 		44F5526D242A266C00081F7A /* MPH5WKWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPH5WKWebView.m; sourceTree = "<group>"; };
 		516D3DE2F22BDC1191C9EEC7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
@@ -245,6 +248,8 @@
 				44AA6E6D23029837002FFDB8 /* MPNebulaViewController.m */,
 				44AA6E7023029838002FFDB8 /* MPOthersViewController.h */,
 				44AA6E7123029838002FFDB8 /* MPOthersViewController.m */,
+				44BB7F62243B0B6C00398948 /* MPParamsViewController.h */,
+				44BB7F63243B0B6D00398948 /* MPParamsViewController.m */,
 				4419FBF4224A23DF00949CB9 /* Template */,
 				44AA6E6323029804002FFDB8 /* Resources */,
 				4419FBEC224A236100949CB9 /* Info.plist */,
@@ -472,6 +477,7 @@
 				4419FBFE224A23DF00949CB9 /* MPJsApiHandler4OpenSms.m in Sources */,
 				4419FBFD224A23DF00949CB9 /* MPH5WebViewController.m in Sources */,
 				44AA6E7823029838002FFDB8 /* MPNavigatorDemoVC.m in Sources */,
+				44BB7F64243B0B6D00398948 /* MPParamsViewController.m in Sources */,
 				44AA6E7623029838002FFDB8 /* MPNebulaViewController.m in Sources */,
 				4419FBFF224A23DF00949CB9 /* MPPlugin4TitleView.m in Sources */,
 				4419FBEE224A236100949CB9 /* main.m in Sources */,
