@@ -27,6 +27,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>位置</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>相机</string>
 	<key>Product Version</key>
 	<string>1.0.0.0</string>
 	<key>UILaunchStoryboardName</key>

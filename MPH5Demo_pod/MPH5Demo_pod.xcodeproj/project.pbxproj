@@ -54,7 +54,6 @@
 		F20BA866F84413589C0AF97E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6C991F4F7F2F52CC90A77F4 /* MessageUI.framework */; };
 		F25DF8AD5AAA190AC90D016B /* MPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193F64B18887B01806F9E7B /* MPTabBarController.m */; };
 		FCCCBF4F11F4CB99BA37AB61 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56DE0432DA2E52646D896161 /* CoreTelephony.framework */; };
-		FCE654EFB2452B0959670D3F /* libPods-MPH5Demo_pod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7266BD7DDD0482360031BA9 /* libPods-MPH5Demo_pod.a */; };
 		FDC076601A3215E9BE16BCC8 /* meta.config in Resources */ = {isa = PBXBuildFile; fileRef = 7D18D51798E25839E28F2457 /* meta.config */; };
 /* End PBXBuildFile section */
 
@@ -149,7 +148,6 @@
 				4470033922E9B770002A798E /* AudioToolbox.framework in Frameworks */,
 				4470033722E9B035002A798E /* libbz2.1.0.tbd in Frameworks */,
 				4470033622E9AFDF002A798E /* JavaScriptCore.framework in Frameworks */,
-				FCE654EFB2452B0959670D3F /* libPods-MPH5Demo_pod.a in Frameworks */,
 				70A481C789A48B2CCA789389 /* WebKit.framework in Frameworks */,
 				4DAD9E2C2A1168457E1AF828 /* CoreMotion.framework in Frameworks */,
 				DAE5A3A389DF4682429CA5C4 /* CoreTelephony.framework in Frameworks */,
