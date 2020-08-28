@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) DFNavigationController *navigationController;
+@property (strong, nonatomic) UINavigationController *navigationController;
 
 + (AppDelegate *)sharedInstance;
 

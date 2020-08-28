@@ -1,1 +1,310 @@
-window.AlipayH5Performance&&!window.AlipayCallFromJS||function(){if(!(navigator.userAgent.indexOf(" AlipayClient/")<0)){var e,n=!1;if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.PSDBRIDGEMESSAGEHANDLER&&window.webkit.messageHandlers.PSDBRIDGEMESSAGEHANDLER.postMessage){window.webkit;var t=window.webkit.messageHandlers.PSDBRIDGEMESSAGEHANDLER.postMessage,o=window.webkit.messageHandlers.PSDBRIDGEMESSAGEHANDLER;e=function(e){return t.apply(o,[e])},n=!0}var i={},a={},r={},s={init:function(){this.init=null,this.renderIframe(),this.monitorDOMReady(),this.monitorPageLoad(),this.monitorJSErrors(),this.monitorDNSTime(),this.monitorCacheRate(),this.monitorMixedContent()},monitorDOMReady:function(){var e=this;/complete|loaded|interactive/.test(document.readyState)?(e.pushMessage("monitor",{name:"domReady",value:(new Date).getTime(),extra:"completed"}),e.sendSignal()):document.addEventListener("DOMContentLoaded",function(n){e.pushMessage("monitor",{name:"domReady",value:(new Date).getTime(),extra:"complete"}),e.sendSignal()},!0)},monitorPageLoad:function(){var e=this;window.addEventListener("load",function(n){e.pushMessage("monitor",{name:"pageLoad",value:(new Date).getTime(),extra:"load"}),e.sendSignal()},!0)},monitorJSErrors:function(){var e=this;window.addEventListener("error",function(n){n.message&&(e.pushMessage("monitor",{name:"jsErrors",value:n.message,filename:n.filename,lineno:n.lineno,colno:n.colno}),e.sendSignal())},!0);var n=function(n){if(n.reason){var t=n.reason;if("object"==typeof n.reason)try{t=JSON.stringify(n.reason)}catch(e){}e.pushMessage("monitor",{name:"jsErrors",value:"Unhandled Promise Rejection:"+t,filename:location.href.split("?")[0]}),e.sendSignal()}};if("undefined"!=typeof PromiseRejectionEvent)window.addEventListener("unhandledrejection",function(e){n(e)},!1);else{var t=window.onunhandledrejection;window.onunhandledrejection=function(e){try{t(e)}catch(e){}n(e)}}},monitorDNSTime:function(){var e=this;window.addEventListener("load",function(n){window.performance&&window.performance.timing&&window.performance.timing.domainLookupEnd-window.performance.timing.domainLookupStart?e.pushMessage("monitor",{name:"dns",value:window.performance.timing.domainLookupEnd-window.performance.timing.domainLookupStart,extra:"support"}):e.pushMessage("monitor",{name:"dns",value:"",extra:"notsupport"}),e.sendSignal()},!0)},monitorMixedContent:function(){var e=this,n=[];/complete|loaded|interactive/.test(document.readyState)?("https:"==window.location.protocol&&[].slice.call(document.querySelectorAll('link[rel=stylesheet][href^="http:"], script[src^="http:"]')).forEach(function(e){n.push(e.tagName+":"+(e.src||e.href))}),n.length>0&&(e.pushMessage("monitor",{name:"mixedContent",value:n.join("@|@")}),e.sendSignal())):document.addEventListener("DOMContentLoaded",function(t){"https:"==window.location.protocol&&[].slice.call(document.querySelectorAll('link[rel=stylesheet][href^="http:"], script[src^="http:"]')).forEach(function(e){n.push(e.tagName+":"+(e.src||e.href))}),n.length>0&&(e.pushMessage("monitor",{name:"mixedContent",value:n.join("@|@")}),e.sendSignal())},!0)},monitorCacheRate:function(){var e,n=this,t={name:"cacheRate"};window.addEventListener("load",function(o){if(window.performance&&"function"==typeof window.performance.getEntriesByType&&(e=window.performance.getEntriesByType("resource"))){if(e.length>0){for(var i=0,a=0;a<e.length;a++)0===e[a].duration&&i++;t.value=(i/e.length).toFixed(4)}else t.value=0;t.extra="support"}else t.value="",t.extra="notsupport";n.pushMessage("monitor",t),n.sendSignal()},!0)},sendSignal:function(t,o){n?setTimeout(function(){e({queue:AlipayH5Performance.fetchMessageQueue(),type:"monitor"})},0):(t="number"==typeof t&&t>=0?t:500,o=o||"monitor",clearTimeout(r[o]),r[o]=setTimeout(function(){i&&i[o]||s.renderIframe(o),i[o]&&(i[o].src="alipay"+o.toLowerCase()+"://dispatch_"+o.toLowerCase()+"_message")},t))},renderIframe:function(e){if(e=e||"monitor",!(i&&i[e]||n))try{var t=document.createElement("iframe");t.id="__AlipayH5"+e+"Iframe",t.style.display="none",document.documentElement?document.documentElement.appendChild(t):document.appendChild(t),i[e]=t}catch(e){}},pushMessage:function(e,n){e=e||"monitor",a&&"array"==l(a[e])||(a[e]=[]),a[e].push(n)},getMessage:function(e){e=e||"monitor",a&&"array"==l(a[e])||(a[e]=[]);var n=JSON.stringify(a[e]);return a[e]=[],n}};s.init(),window.AlipayJSBridge?(s.pushMessage("monitor",{name:"bridgeReady",value:Date.now()+""}),s.sendSignal(0)):document.addEventListener("AlipayJSBridgeReady",function(){s.pushMessage("monitor",{name:"bridgeReady",value:Date.now()+""}),s.sendSignal(0)},!1);var d={fetchMessageQueue:function(e){return s.getMessage(e)},reportBizReady:function(){s.pushMessage("monitor",{name:"availableTime",value:Date.now()+""}),s.sendSignal(0)},pushMessage:function(e,n){s.pushMessage(e,n)},addTrackData:function(e,n){n=n||"monitor",e.value&&(e.value+="|time="+(new Date).getTime()),s.pushMessage(n,e),s.sendSignal(0)},addTimeReport:function(e){var n="";for(var t in e)n+=(""==n?"":"&")+t+"="+e[t];d.addTrackData({name:"timeReport",value:n})},sendSignal:function(e){s.renderIframe(e),s.sendSignal(0,e)},version:"1.2"};window.AlipayH5Performance=d}function l(e){return Object.prototype.toString.call(e).replace(/\[object (\w+)\]/,"$1").toLowerCase()}}(),window.AlipayH5Report&&!window.AlipayCallFromJS||function(){if(!(navigator.userAgent.indexOf(" AlipayClient/")<0)){var e={fetchMessageQueue:function(e){return window.AlipayH5Performance.fetchMessageQueue("report")}};window.AlipayH5Report=e}}();
+(window.AlipayH5Performance && !window.AlipayCallFromJS) || (function(){
+    if (navigator.userAgent.indexOf(' AlipayClient/') < 0) {
+        return;
+    }
+
+    /***************Messge Handler*****************/
+    var safeCallMessage,shouldUseMessageChannel = false;
+    if (window.webkit 
+        && window.webkit.messageHandlers 
+        && window.webkit.messageHandlers.PSDBRIDGEMESSAGEHANDLER 
+        && window.webkit.messageHandlers.PSDBRIDGEMESSAGEHANDLER.postMessage) {
+        var webkit = window.webkit;
+        var postMessage = window.webkit.messageHandlers.PSDBRIDGEMESSAGEHANDLER.postMessage;
+        var PSDBRIDGEMESSAGEHANDLER = window.webkit.messageHandlers.PSDBRIDGEMESSAGEHANDLER;
+        safeCallMessage = function(message){
+            return postMessage.apply(PSDBRIDGEMESSAGEHANDLER,[message]);
+        }
+        shouldUseMessageChannel = true;
+    }
+
+    /***************monitorKernel*****************/
+    var iframe = {};
+    var sendMessageQueue={};
+    var timerHandler={};
+    function type(obj) {
+        return Object.prototype.toString.call(obj).replace(/\[object (\w+)\]/, '$1').toLowerCase();
+    }
+    var monitorKernel={
+        init:function(){
+            this.init=null;
+            this.renderIframe();
+            this.monitorDOMReady();
+            this.monitorPageLoad();
+            this.monitorJSErrors();
+            this.monitorDNSTime();
+            this.monitorCacheRate();
+            this.monitorMixedContent();
+        },
+        monitorDOMReady:function(){
+            var t=this;
+            var readyRE = /complete|loaded|interactive/;
+            if (readyRE.test(document.readyState)) {
+                t.pushMessage('monitor',{
+                    name:'domReady',
+                    value:new Date().getTime(),
+                    extra:'completed'
+                });
+                t.sendSignal();
+            } else {
+                document.addEventListener("DOMContentLoaded", function(event) {
+                    t.pushMessage('monitor',{
+                        name:'domReady',
+                        value:new Date().getTime(),
+                        extra:'complete'
+                    });
+                    t.sendSignal();
+                },true);
+            }
+        },
+        monitorPageLoad:function(){
+            var t=this;
+            window.addEventListener("load", function(event) {
+                t.pushMessage('monitor',{
+                    name:'pageLoad',
+                    value:new Date().getTime(),
+                    extra:'load'
+                });
+                t.sendSignal();
+            },true);
+        },
+        monitorJSErrors:function(){
+            var t=this;
+            window.addEventListener("error", function(event) {
+                if (event.message) {
+                    t.pushMessage('monitor',{
+                                  name:'jsErrors',
+                                  value:event.message,
+                                  filename:event.filename,
+                                  lineno:event.lineno,
+                                  colno:event.colno
+                                  });
+                    t.sendSignal();
+                }
+            },true);
+            var unhandledrejection_handler = function(event) {
+                if (event.reason) {
+                    var error = event.reason;
+                    if (typeof(event.reason) === 'object') {
+                         try {
+                             error =JSON.stringify(event.reason);
+                         } catch (ex) { }
+                     }
+
+                    t.pushMessage('monitor', {
+                        name: 'jsErrors',
+                        value: 'Unhandled Promise Rejection:' + error,
+                        filename: location.href.split("?")[0]
+                    });
+                    t.sendSignal();
+                }
+            }
+
+            if (typeof PromiseRejectionEvent !== 'undefined') {
+                window.addEventListener("unhandledrejection",
+                function(event) {
+                    unhandledrejection_handler(event);
+                },
+                false);
+            } else {
+                var oldHandler = window['onunhandledrejection'];
+                window['onunhandledrejection'] = function(event) {
+                    try {
+                        oldHandler(event);
+                    } catch(ex) {}
+                    unhandledrejection_handler(event);
+                };
+            }
+        },
+        monitorDNSTime:function(){
+            var t=this;
+            window.addEventListener("load", function(event) {
+                if(window.performance && window.performance.timing && window.performance.timing.domainLookupEnd-window.performance.timing.domainLookupStart){
+                    t.pushMessage('monitor',{
+                        name:'dns',
+                        value:window.performance.timing.domainLookupEnd-window.performance.timing.domainLookupStart,
+                        extra:'support'
+                    });
+                }else{
+                    t.pushMessage('monitor',{
+                        name:'dns',
+                        value:'',
+                        extra:'notsupport'
+                    });
+                }
+                t.sendSignal();
+            },true);
+        },
+        monitorMixedContent:function(){
+            var t=this;
+            var errorArr=[];
+            var readyRE = /complete|loaded|interactive/;
+            if (readyRE.test(document.readyState)) {
+                window.location.protocol == 'https:' && [].slice.call(document.querySelectorAll('link[rel=stylesheet][href^="http:"], script[src^="http:"]')).forEach(function (elem) {
+                    errorArr.push(elem.tagName + ':' + (elem.src || elem.href));
+                });
+                if(errorArr.length>0){
+                    t.pushMessage('monitor',{
+                        name:'mixedContent',
+                        value:errorArr.join('@|@')
+                    });
+                    t.sendSignal();
+                }
+            } else {
+                document.addEventListener("DOMContentLoaded", function(event) {
+                    window.location.protocol == 'https:' && [].slice.call(document.querySelectorAll('link[rel=stylesheet][href^="http:"], script[src^="http:"]')).forEach(function (elem) {
+                        errorArr.push(elem.tagName + ':' + (elem.src || elem.href));
+                    });
+                    if(errorArr.length>0){
+                        t.pushMessage('monitor',{
+                            name:'mixedContent',
+                            value:errorArr.join('@|@')
+                        });
+                        t.sendSignal();
+                    }
+                },true);
+            }
+        },
+        monitorCacheRate:function(){
+            var t=this,
+                result={
+                    name:'cacheRate'
+                },resourceArr;
+            window.addEventListener("load", function(event) {
+                if(window.performance && typeof window.performance.getEntriesByType ==='function' && (resourceArr=window.performance.getEntriesByType("resource"))){
+                    if(resourceArr.length>0){
+                        var cacheCount=0;
+                        for(var i=0;i<resourceArr.length;i++){
+                            if(resourceArr[i].duration===0){
+                                cacheCount++;
+                            }
+                        }
+                        result.value=(cacheCount/resourceArr.length).toFixed(4);
+
+                    }else{
+                        result.value=0.0000;
+                    }
+                    result.extra='support';
+                }else{
+                    result.value='';
+                    result.extra='notsupport';
+                }
+                t.pushMessage('monitor',result);
+                t.sendSignal();
+            },true);
+        },
+        sendSignal:function(timer,tag){
+            if (shouldUseMessageChannel) {
+                setTimeout(function(){
+                    safeCallMessage({
+                        queue:AlipayH5Performance.fetchMessageQueue(),
+                        type:"monitor"
+                    });
+                },0);
+            }else{
+                timer = (typeof timer=='number' &&timer>=0)?timer:500;
+                tag = tag || 'monitor';
+                clearTimeout(timerHandler[tag]);
+                timerHandler[tag]=setTimeout(function(){
+                    if (!(iframe && iframe[tag])){
+                        monitorKernel.renderIframe(tag);
+                    }
+                    if (iframe[tag]) {
+                        iframe[tag].src='alipay'+tag.toLowerCase()+'://dispatch_'+tag.toLowerCase()+'_message';
+                    }
+                },timer);
+            }
+        },
+        renderIframe:function(tag) {
+            tag = tag || 'monitor';
+            if ((iframe && iframe[tag]) || shouldUseMessageChannel) return;
+            try {
+                var iframeElement = document.createElement("iframe");
+                iframeElement.id = "__AlipayH5"+tag+"Iframe";
+                iframeElement.style.display = "none";
+                if (document.documentElement) {
+                    document.documentElement.appendChild(iframeElement);
+                }else{
+                    //for pdf file
+                    document.appendChild(iframeElement);
+                }
+                iframe[tag] = iframeElement;
+            } catch (e) {}
+        },
+        pushMessage:function(tag,obj){
+            tag = tag || 'monitor';
+            if(!(sendMessageQueue && type(sendMessageQueue[tag]) == 'array')){
+                sendMessageQueue[tag] = [];
+            }
+            sendMessageQueue[tag].push(obj);
+
+        },
+        getMessage:function(tag){
+            tag = tag || 'monitor';
+            if(!(sendMessageQueue && type(sendMessageQueue[tag]) == 'array')){
+                sendMessageQueue[tag] = [];
+            }
+            var messageQueueString = JSON.stringify(sendMessageQueue[tag]);
+            sendMessageQueue[tag] = [];
+            return messageQueueString;
+
+        }
+    }
+    monitorKernel.init();
+    if (window.AlipayJSBridge) {
+        monitorKernel.pushMessage('monitor',{name: 'bridgeReady',value: Date.now() + ''});
+        monitorKernel.sendSignal(0);
+    } else {
+        document.addEventListener('AlipayJSBridgeReady', function(){
+            monitorKernel.pushMessage('monitor',{name: 'bridgeReady',value: Date.now() + ''});
+            monitorKernel.sendSignal(0);
+        }, false);
+    }
+    var monitorInterface={
+        fetchMessageQueue: function (tag) {
+            return monitorKernel.getMessage(tag);
+        },
+        reportBizReady: function(){
+            monitorKernel.pushMessage('monitor',{name: 'availableTime',value: Date.now() + ''});
+            monitorKernel.sendSignal(0);
+        },
+        pushMessage:function(tag,obj){
+            monitorKernel.pushMessage(tag,obj);
+        },
+        addTrackData:function(obj,tag){
+            tag = tag || 'monitor';
+            if(obj.value){
+                obj.value+=('|time='+new Date().getTime());
+            }
+            monitorKernel.pushMessage(tag,obj);
+            monitorKernel.sendSignal(0);
+        },
+        addTimeReport:function(obj){
+            var objStr = '';
+            for(var item in obj){
+                objStr += (((objStr=='')?'':'&')+item+'='+obj[item]);
+            }
+            monitorInterface.addTrackData({
+                'name':'timeReport',
+                'value':objStr
+            });
+        },
+        sendSignal:function(tag){
+            monitorKernel.renderIframe(tag);
+            monitorKernel.sendSignal(0,tag);
+        },
+        version:'1.2'
+    }
+    window.AlipayH5Performance = monitorInterface;
+})();
+(window.AlipayH5Report && !window.AlipayCallFromJS) || (function(){
+    if (navigator.userAgent.indexOf(' AlipayClient/') < 0) {
+        return;
+    }
+    var monitorInterface={
+        fetchMessageQueue: function (tag) {
+            return window.AlipayH5Performance.fetchMessageQueue('report');
+        }
+    }
+    window.AlipayH5Report = monitorInterface;
+})();

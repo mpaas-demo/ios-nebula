@@ -1,11 +1,13 @@
 plugin "cocoapods-mPaaS"
 source "https://code.aliyun.com/mpaas-public/podspecs.git"
-mPaaS_baseline '10.1.60'
-mPaaS_version_code 30   # This line is maintained by MPaaS plugin automatically. Please don't modify.
+#source 'https://github.com/CocoaPods/Specs.git'
+
+mPaaS_baseline '10.1.68'
+mPaaS_version_code 16   # This line is maintained by MPaaS plugin automatically. Please don't modify.
 
 platform :ios, '9.0'
 target 'MPH5Demo_pod' do
 
  mPaaS_pod "mPaaS_Nebula"
-
+ 
 end

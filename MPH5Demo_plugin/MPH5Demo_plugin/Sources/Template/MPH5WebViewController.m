@@ -35,13 +35,6 @@
     if ([expandParams count] > 0) {
         [self customNavigationBarWithParams:expandParams];
     }
-    
-    // 自定义导航栏view
-//    [self.navigationController.navigationBar setHidden:YES];
-//    UIView *naviBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, AUCommonUIGetScreenWidth(), 200)];
-//    naviBarView.backgroundColor = [UIColor redColor];
-//    [self.view addSubview:naviBarView];
-//    self.customNavigationBar = naviBarView;
 }
 
 - (void)customNavigationBarWithParams:(NSDictionary *)expandParams
@@ -49,7 +42,7 @@
     // 定制导航栏背景
     NSString *titleBarColorString = expandParams[@"titleBarColor"];
     if ([titleBarColorString isKindOfClass:[NSString class]] && [titleBarColorString length] > 0) {
-        UIColor *titleBarColor = [UIColor colorFromHexString:titleBarColorString];
+        UIColor *titleBarColor = [UIColor colorFromHexString_au:titleBarColorString];
         [self.navigationController.navigationBar setNavigationBarStyleWithColor:titleBarColor translucent:NO];
         [self.navigationController.navigationBar setNavigationBarBottomLineColor:titleBarColor];
     }
@@ -59,37 +52,26 @@
     if (showTitleBar && ![showTitleBar boolValue]) {
         self.options.showTitleBar = NO;
         [self.navigationController setNavigationBarHidden:YES];
-        
-        // 调整webview的位置
-        UIWebView *webView = (UIWebView *)[self psdContentView];
-        CGRect frame = webView.frame;
-        if (frame.origin.y != 0) {
-            frame.size.height += frame.origin.y;
-            frame.origin.y = 0;
-        }
-        webView.frame = frame;
-        self.automaticallyAdjustsScrollViewInsets = NO;
-        
     }
     
     //导航栏是否透明，默认不透明。设置透明后，webview需全屏
-    NSString *transparentTitle = expandParams[@"transparentTitle"];
-    if ([transparentTitle isEqualToString:@"always"] || [transparentTitle isEqualToString:@"auto"]) {
-
-        // 导航栏和底部横线变为透明
-        UIColor *clearColor = [UIColor clearColor] ;
-        [self.navigationController.navigationBar setNavigationBarTranslucentStyle];
-        [self.navigationController.navigationBar setNavigationBarStyleWithColor:clearColor translucent:YES];
-        
-        // 调整webview的位置
-        self.edgesForExtendedLayout = UIRectEdgeAll;
-        if (@available(iOS 11.0, *)) {
-            UIWebView *wb = (UIWebView *)[self psdContentView];
-            wb.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }else{
-            self.automaticallyAdjustsScrollViewInsets = NO;
-        }
-    }
+//    NSString *transparentTitle = expandParams[@"transparentTitle"];
+//    if ([transparentTitle isEqualToString:@"always"] || [transparentTitle isEqualToString:@"auto"]) {
+//
+//        // 导航栏和底部横线变为透明
+//        UIColor *clearColor = [UIColor clearColor] ;
+//        [self.navigationController.navigationBar setNavigationBarTranslucentStyle];
+//        [self.navigationController.navigationBar setNavigationBarStyleWithColor:clearColor translucent:YES];
+//
+//        // 调整webview的位置
+//        self.edgesForExtendedLayout = UIRectEdgeAll;
+//        if (@available(iOS 11.0, *)) {
+//            UIWebView *wb = (UIWebView *)[self psdContentView];
+//            wb.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//        }else{
+//            self.automaticallyAdjustsScrollViewInsets = NO;
+//        }
+//    }
     
     // 修改默认返回按钮文案颜色
     NSString *backButtonColorString = expandParams[@"backButtonColor"];
@@ -114,12 +96,43 @@
         [[titleView mainTitleLabel] setFont:[UIFont systemFontOfSize:16]];
         [[titleView mainTitleLabel] setTextColor:titleColor];
     }
+    
+}
 
+- (void)customNavigationBarView
+{
+    // 自定义导航栏view
+    [self.navigationController.navigationBar setHidden:YES];
+    UIView *naviBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, AUCommonUIGetScreenWidth(), 200)];
+    naviBarView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:naviBarView];
+    self.customNavigationBar = naviBarView;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    if ([self.url.absoluteString containsString:@"H52Native"]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"sendEvent" style:UIBarButtonItemStylePlain target:self action:@selector(sendEventToH5)];
+    }
+}
+
+- (void)sendEventToH5
+{
+    // native向 H5 发送事件
+    [self callHandler:@"nativeEvent" data:@{@"key1":@"value1"} responseCallback:^(id responseData) {
+        
+    }];
+    
+}
+
+- (void)runJSFromNative
+{
+    // native 执行一段 JS
+    [self.psdContentView evaluateJavaScript:@"alert(\'run js from native\')" completionHandler:^(id  _Nonnull result, NSError * _Nonnull error) {
+
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -160,10 +173,13 @@
 - (void)handleEvent:(PSDEvent *)event
 {
     [super handleEvent:event];
+    
     if (![[event.context currentViewController] isEqual:self]) {
         return;
     }
+    
     if ([kEvent_Navigation_Start isEqualToString:event.eventType]) {
+        // 此事件可拦截当前url是否加载
         BOOL shouldStart = [self handleContentViewShouldStartLoad:(id)event ];
         
         if (!shouldStart) {
@@ -178,9 +194,6 @@
     }
     else if ([kEvent_Navigation_Error isEqualToString:event.eventType]) {
         [self handleContentViewDidFailLoad:(id)event];
-    }
-    else if ([kNBEvent_Scene_NavigationItem_Left_Back_Click isEqualToString:event.eventType]) {
-        
     }
 }
 

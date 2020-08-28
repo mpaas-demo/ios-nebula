@@ -41,6 +41,21 @@
     [super pluginDidLoad];
 }
 
+- (void)addJSApis
+{
+    [super addJSApis];
+    
+    // 代码注册 jsapi
+    PSDJsApi *jsApi4DemoTest2 = [PSDJsApi jsApi:@"demoTest2"
+                                          handler:^(NSDictionary *data, PSDContext *context, PSDJsApiResponseCallbackBlock responseCallbackBlock) {
+                                              responseCallbackBlock(@{@"result":@"jsapi-demoTest2调用 Native 的处理结果"});
+                                          }
+                                      checkParams:NO
+                                        isPrivate:NO
+                                            scope:self.scope];
+    [self registerJsApi2Target:jsApi4DemoTest2];
+}
+
 - (void)handleEvent:(PSDEvent *)event
 {
     [super handleEvent:event];
@@ -99,8 +114,8 @@
         [[e.titleView mainTitleLabel] setFont:[UIFont systemFontOfSize:16]];
         [[e.titleView mainTitleLabel] setTextColor:[UIColor greenColor]];
         [e.titleView mainTitleLabel].lineBreakMode = NSLineBreakByTruncatingMiddle;
-        [e preventDefault];
-        [e stopPropagation];
+//        [e preventDefault];
+//        [e stopPropagation];
     }else if ([kNBEvent_Scene_NavigationItem_Right_Setting_Create_After isEqualToString:event.eventType] || [kNBEvent_Scene_NavigationItem_Right_SubSetting_Create_After isEqualToString:event.eventType]) {
         // 更改已创建RightBarItem的样式
         NBNavigationItemRightSettingEvent *settingEvent = (id)event;

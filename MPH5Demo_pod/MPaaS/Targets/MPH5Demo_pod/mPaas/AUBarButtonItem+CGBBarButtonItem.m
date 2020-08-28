@@ -10,9 +10,9 @@
 
 @implementation AUBarButtonItem (CGBBarButtonItem)
 
-+ (UIImage *)au_default_backButtonImg{
-    
-    return APCommonUILoadImage(@"back_button_normal_white");
-    
-}
+//+ (UIImage *)au_default_backButtonImg{
+//    
+//    return APCommonUILoadImage(@"back_button_normal_white");
+//    
+//}
 @end

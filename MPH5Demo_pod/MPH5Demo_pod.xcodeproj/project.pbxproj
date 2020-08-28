@@ -25,6 +25,12 @@
 		4470033922E9B770002A798E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4470033822E9B76D002A798E /* AudioToolbox.framework */; };
 		4470033B22E9B7D9002A798E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4470033A22E9B7D8002A798E /* AVFoundation.framework */; };
 		4470033D22E9B823002A798E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4470033C22E9B823002A798E /* MobileCoreServices.framework */; };
+		4498D52F24F8E7780009A7C1 /* MPH5WKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4498D52D24F8E7780009A7C1 /* MPH5WKWebView.m */; };
+		4498D53424F8E7990009A7C1 /* AUBarButtonItem+CGBBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4498D53224F8E7990009A7C1 /* AUBarButtonItem+CGBBarButtonItem.m */; };
+		4498D53524F8E7990009A7C1 /* AUThemeManager+CGBThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4498D53324F8E7990009A7C1 /* AUThemeManager+CGBThemeManager.m */; };
+		4498D54B24F8ED5D0009A7C1 /* DTBootPhase+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 4498D54624F8ED5D0009A7C1 /* DTBootPhase+Category.m */; };
+		4498D54C24F8ED5D0009A7C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4498D54924F8ED5D0009A7C1 /* AppDelegate.m */; };
+		4498D54D24F8ED5D0009A7C1 /* MPBootLoaderImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4498D54A24F8ED5D0009A7C1 /* MPBootLoaderImpl.m */; };
 		44AA6E6923029804002FFDB8 /* DemoCustomPresetApps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 44AA6E6423029804002FFDB8 /* DemoCustomPresetApps.bundle */; };
 		44AA6E6A23029804002FFDB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44AA6E6523029804002FFDB8 /* Assets.xcassets */; };
 		44AA6E6B23029804002FFDB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44AA6E6623029804002FFDB8 /* LaunchScreen.storyboard */; };
@@ -35,12 +41,7 @@
 		44AA6E7923029838002FFDB8 /* MPNavigatorScrollVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA6E7523029838002FFDB8 /* MPNavigatorScrollVC.m */; };
 		44AA6E7C2302987D002FFDB8 /* MPJsApiHandler4SetDoubleTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA6E7B2302987D002FFDB8 /* MPJsApiHandler4SetDoubleTitle.m */; };
 		44AA6E7F23029887002FFDB8 /* MPPlugin4WebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA6E7E23029887002FFDB8 /* MPPlugin4WebView.m */; };
-		44AA6E9423029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA6E9023029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.m */; };
-		44AA6E9523029992002FFDB8 /* AUThemeManager+CGBThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA6E9123029992002FFDB8 /* AUThemeManager+CGBThemeManager.m */; };
-		44D6FA86242B86EC0093D7A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D6FA84242B86EC0093D7A2 /* AppDelegate.m */; };
-		44D6FA89242B87190093D7A2 /* MPBootLoaderImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D6FA88242B87190093D7A2 /* MPBootLoaderImpl.m */; };
 		44BB7F64243B0B6D00398948 /* MPParamsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BB7F63243B0B6D00398948 /* MPParamsViewController.m */; };
-		44F5526E242A266C00081F7A /* MPH5WKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F5526D242A266C00081F7A /* MPH5WKWebView.m */; };
 		47B0FA69C8D6844814C91B2E /* DTFrameworkInterface+MPH5Demo_pod.m in Sources */ = {isa = PBXBuildFile; fileRef = 86517593E5F25A3A727D7846 /* DTFrameworkInterface+MPH5Demo_pod.m */; };
 		4DAD9E2C2A1168457E1AF828 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC023BB6443B3DCB25980F62 /* CoreMotion.framework */; };
 		4F82DD436C0603A79EBBE729 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B86E1CE0CC96A529EA0E17E4 /* DemoViewController.m */; };
@@ -86,6 +87,18 @@
 		4470033822E9B76D002A798E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4470033A22E9B7D8002A798E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4470033C22E9B823002A798E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		4498D52D24F8E7780009A7C1 /* MPH5WKWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPH5WKWebView.m; sourceTree = "<group>"; };
+		4498D52E24F8E7780009A7C1 /* MPH5WKWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPH5WKWebView.h; sourceTree = "<group>"; };
+		4498D53024F8E7990009A7C1 /* AUThemeManager+CGBThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUThemeManager+CGBThemeManager.h"; sourceTree = "<group>"; };
+		4498D53124F8E7990009A7C1 /* AUBarButtonItem+CGBBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUBarButtonItem+CGBBarButtonItem.h"; sourceTree = "<group>"; };
+		4498D53224F8E7990009A7C1 /* AUBarButtonItem+CGBBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AUBarButtonItem+CGBBarButtonItem.m"; sourceTree = "<group>"; };
+		4498D53324F8E7990009A7C1 /* AUThemeManager+CGBThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AUThemeManager+CGBThemeManager.m"; sourceTree = "<group>"; };
+		4498D54524F8ED5D0009A7C1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4498D54624F8ED5D0009A7C1 /* DTBootPhase+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTBootPhase+Category.m"; sourceTree = "<group>"; };
+		4498D54724F8ED5D0009A7C1 /* MPBootLoaderImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPBootLoaderImpl.h; sourceTree = "<group>"; };
+		4498D54824F8ED5D0009A7C1 /* DTBootPhase+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTBootPhase+Category.h"; sourceTree = "<group>"; };
+		4498D54924F8ED5D0009A7C1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4498D54A24F8ED5D0009A7C1 /* MPBootLoaderImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPBootLoaderImpl.m; sourceTree = "<group>"; };
 		44AA6E6423029804002FFDB8 /* DemoCustomPresetApps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DemoCustomPresetApps.bundle; sourceTree = "<group>"; };
 		44AA6E6523029804002FFDB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44AA6E6723029804002FFDB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,18 +116,8 @@
 		44AA6E7B2302987D002FFDB8 /* MPJsApiHandler4SetDoubleTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPJsApiHandler4SetDoubleTitle.m; sourceTree = "<group>"; };
 		44AA6E7D23029887002FFDB8 /* MPPlugin4WebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPPlugin4WebView.h; sourceTree = "<group>"; };
 		44AA6E7E23029887002FFDB8 /* MPPlugin4WebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPPlugin4WebView.m; sourceTree = "<group>"; };
-		44AA6E9023029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AUBarButtonItem+CGBBarButtonItem.m"; sourceTree = "<group>"; };
-		44AA6E9123029992002FFDB8 /* AUThemeManager+CGBThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AUThemeManager+CGBThemeManager.m"; sourceTree = "<group>"; };
-		44AA6E9223029992002FFDB8 /* AUThemeManager+CGBThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUThemeManager+CGBThemeManager.h"; sourceTree = "<group>"; };
-		44AA6E9323029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUBarButtonItem+CGBBarButtonItem.h"; sourceTree = "<group>"; };
-		44D6FA84242B86EC0093D7A2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		44D6FA85242B86EC0093D7A2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		44D6FA87242B87190093D7A2 /* MPBootLoaderImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPBootLoaderImpl.h; sourceTree = "<group>"; };
-		44D6FA88242B87190093D7A2 /* MPBootLoaderImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPBootLoaderImpl.m; sourceTree = "<group>"; };
 		44BB7F62243B0B6C00398948 /* MPParamsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPParamsViewController.h; path = ../../MPH5Demo_plugin/MPH5Demo_plugin/Sources/MPParamsViewController.h; sourceTree = "<group>"; };
 		44BB7F63243B0B6D00398948 /* MPParamsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPParamsViewController.m; path = ../../MPH5Demo_plugin/MPH5Demo_plugin/Sources/MPParamsViewController.m; sourceTree = "<group>"; };
-		44F5526C242A266C00081F7A /* MPH5WKWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPH5WKWebView.h; sourceTree = "<group>"; };
-		44F5526D242A266C00081F7A /* MPH5WKWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPH5WKWebView.m; sourceTree = "<group>"; };
 		516D3DE2F22BDC1191C9EEC7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		53C6A5B62CCD93D756BAB5E7 /* MPH5Demo_pod-Prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MPH5Demo_pod-Prefix.pch"; path = "../../../MPH5Demo_pod/MPH5Demo_pod-Prefix.pch"; sourceTree = "<group>"; };
 		56DE0432DA2E52646D896161 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
@@ -184,12 +187,6 @@
 			children = (
 				1688B476F5195C8E176943C0 /* DTFrameworkInterface+MPH5Demo_pod.h */,
 				86517593E5F25A3A727D7846 /* DTFrameworkInterface+MPH5Demo_pod.m */,
-				44F5526C242A266C00081F7A /* MPH5WKWebView.h */,
-				44F5526D242A266C00081F7A /* MPH5WKWebView.m */,
-				44AA6E9323029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.h */,
-				44AA6E9023029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.m */,
-				44AA6E9223029992002FFDB8 /* AUThemeManager+CGBThemeManager.h */,
-				44AA6E9123029992002FFDB8 /* AUThemeManager+CGBThemeManager.m */,
 				8A8D988AF902C169FCD16EAF /* Images_mPaaS.xcassets */,
 				902E2843F61100155E4D17B1 /* MPLauncherAppDelegate.h */,
 				5BE5DAE2EDEA428DE4BDFC4B /* MPLauncherAppDelegate.m */,
@@ -198,10 +195,7 @@
 				B3F19932EA526F22158B7AC6 /* MobileRuntime.plist */,
 				DBAECB2C059FC13EF2608C97 /* DemoViewController.h */,
 				B86E1CE0CC96A529EA0E17E4 /* DemoViewController.m */,
-				44D6FA85242B86EC0093D7A2 /* AppDelegate.h */,
-				44D6FA84242B86EC0093D7A2 /* AppDelegate.m */,
-				44D6FA87242B87190093D7A2 /* MPBootLoaderImpl.h */,
-				44D6FA88242B87190093D7A2 /* MPBootLoaderImpl.m */,
+				4498D54424F8ED5D0009A7C1 /* NoneFramework */,
 			);
 			path = APMobileFramework;
 			sourceTree = "<group>";
@@ -273,6 +267,7 @@
 				4419FBFC224A23DF00949CB9 /* MPH5WebViewController.h */,
 				4419FBF5224A23DF00949CB9 /* MPH5WebViewController.m */,
 				4419FC00224A243000949CB9 /* H52Native.html */,
+				4498D52C24F8E7780009A7C1 /* CustomFile */,
 				4419FBF6224A23DF00949CB9 /* JsApis */,
 				4419FBF9224A23DF00949CB9 /* Plugins */,
 			);
@@ -301,6 +296,28 @@
 			path = Plugins;
 			sourceTree = "<group>";
 		};
+		4498D52C24F8E7780009A7C1 /* CustomFile */ = {
+			isa = PBXGroup;
+			children = (
+				4498D52D24F8E7780009A7C1 /* MPH5WKWebView.m */,
+				4498D52E24F8E7780009A7C1 /* MPH5WKWebView.h */,
+			);
+			path = CustomFile;
+			sourceTree = "<group>";
+		};
+		4498D54424F8ED5D0009A7C1 /* NoneFramework */ = {
+			isa = PBXGroup;
+			children = (
+				4498D54524F8ED5D0009A7C1 /* AppDelegate.h */,
+				4498D54624F8ED5D0009A7C1 /* DTBootPhase+Category.m */,
+				4498D54724F8ED5D0009A7C1 /* MPBootLoaderImpl.h */,
+				4498D54824F8ED5D0009A7C1 /* DTBootPhase+Category.h */,
+				4498D54924F8ED5D0009A7C1 /* AppDelegate.m */,
+				4498D54A24F8ED5D0009A7C1 /* MPBootLoaderImpl.m */,
+			);
+			path = NoneFramework;
+			sourceTree = "<group>";
+		};
 		44AA6E6323029804002FFDB8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +344,10 @@
 			children = (
 				0E5E4A79C2F95F6BEB80B4A7 /* MPaaSInterface+MPH5Demo_pod.h */,
 				3779B2336866AC04F0F668C2 /* MPaaSInterface+MPH5Demo_pod.m */,
+				4498D53124F8E7990009A7C1 /* AUBarButtonItem+CGBBarButtonItem.h */,
+				4498D53224F8E7990009A7C1 /* AUBarButtonItem+CGBBarButtonItem.m */,
+				4498D53024F8E7990009A7C1 /* AUThemeManager+CGBThemeManager.h */,
+				4498D53324F8E7990009A7C1 /* AUThemeManager+CGBThemeManager.m */,
 			);
 			path = mPaas;
 			sourceTree = "<group>";
@@ -481,29 +502,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44AA6E9523029992002FFDB8 /* AUThemeManager+CGBThemeManager.m in Sources */,
+				4498D54C24F8ED5D0009A7C1 /* AppDelegate.m in Sources */,
 				4419FBFE224A23DF00949CB9 /* MPJsApiHandler4OpenSms.m in Sources */,
 				4419FBFD224A23DF00949CB9 /* MPH5WebViewController.m in Sources */,
 				44AA6E7823029838002FFDB8 /* MPNavigatorDemoVC.m in Sources */,
 				44BB7F64243B0B6D00398948 /* MPParamsViewController.m in Sources */,
 				44AA6E7623029838002FFDB8 /* MPNebulaViewController.m in Sources */,
-				44D6FA89242B87190093D7A2 /* MPBootLoaderImpl.m in Sources */,
 				4419FBFF224A23DF00949CB9 /* MPPlugin4TitleView.m in Sources */,
+				4498D53424F8E7990009A7C1 /* AUBarButtonItem+CGBBarButtonItem.m in Sources */,
 				4419FBEE224A236100949CB9 /* main.m in Sources */,
-				44AA6E9423029992002FFDB8 /* AUBarButtonItem+CGBBarButtonItem.m in Sources */,
 				44AA6E7723029838002FFDB8 /* MPOthersViewController.m in Sources */,
+				4498D54B24F8ED5D0009A7C1 /* DTBootPhase+Category.m in Sources */,
+				4498D53524F8E7990009A7C1 /* AUThemeManager+CGBThemeManager.m in Sources */,
 				4419FBE6224A236000949CB9 /* MPH5Demo_pod.xcdatamodeld in Sources */,
 				69AF139E1730CE9D5A4A255E /* MPaaSInterface+MPH5Demo_pod.m in Sources */,
 				44AA6E7C2302987D002FFDB8 /* MPJsApiHandler4SetDoubleTitle.m in Sources */,
 				47B0FA69C8D6844814C91B2E /* DTFrameworkInterface+MPH5Demo_pod.m in Sources */,
 				44AA6E7923029838002FFDB8 /* MPNavigatorScrollVC.m in Sources */,
+				4498D52F24F8E7780009A7C1 /* MPH5WKWebView.m in Sources */,
 				05DA43DC4D15D7653895CEBB /* MPLauncherAppDelegate.m in Sources */,
 				F25DF8AD5AAA190AC90D016B /* MPTabBarController.m in Sources */,
 				44AA6E7F23029887002FFDB8 /* MPPlugin4WebView.m in Sources */,
 				A8F2C312A8BB3CD02A60CE76 /* TestDemoViewController.m in Sources */,
 				4F82DD436C0603A79EBBE729 /* DemoViewController.m in Sources */,
-				44F5526E242A266C00081F7A /* MPH5WKWebView.m in Sources */,
-				44D6FA86242B86EC0093D7A2 /* AppDelegate.m in Sources */,
+				4498D54D24F8ED5D0009A7C1 /* MPBootLoaderImpl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

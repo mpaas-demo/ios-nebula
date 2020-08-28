@@ -21,7 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.title = @"H5Demo";
+    self.title = @"H5容器与离线包";
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -72,7 +72,9 @@
 
 - (void)customJsApi
 {
-    [[MPNebulaAdapterInterface shareInstance] startH5ViewControllerWithNebulaApp:@{@"appId":@"70000000"}];
+//    [[MPNebulaAdapterInterface shareInstance] startH5ViewControllerWithNebulaApp:@{@"appId":@"70000000"}];
+    
+    [MPNebulaAdapterInterface startTinyAppWithId:@"2018080616290001" params:nil];
 }
 
 - (void)transportParams

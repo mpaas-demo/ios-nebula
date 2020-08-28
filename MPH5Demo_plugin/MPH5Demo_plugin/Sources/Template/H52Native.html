@@ -37,44 +37,20 @@
     <body>
         <div id="main" width = "100%" height = "100%">
             
-<!--            <p class="descript_title">启动参数</p>-->
-<!--            <button class="jsapiButton" onclick="get_startupParams()">当前页面启动参数</button>-->
-<!--            <button class="jsapiButton" onclick="jsapi_call('pushWindow', {-->
-<!--                // 要打开页面的 URL-->
-<!--                url: window.location.href,-->
-<!--                // 打开页面的配置参数-->
-<!--                param: {-->
-<!--                readTitle: true,    //自动读取 title-->
-<!--                showOptionMenu: false,    // 隐藏右边菜单-->
-<!--                },-->
-<!--                // 用于给新开的页面传递参数，可选-->
-<!--                // 在新开的页面使用 AlipayJSBridge.startupParams 可以获取到 passData-->
-<!--                passData: {-->
-<!--                key1: 'key1Value',-->
-<!--                key2: 'key2Value'-->
-<!--                }-->
-<!--                })">pushWindow 传参</button>-->
-<!--            <button class="jsapiButton" onclick="jsapi_call('startApp', {appId:'90000000', param:{showOptionMenu:'NO', key3:'startApp'}})">startApp 传参</button>-->
-<!--            -->
             <p class="descript_title">窗口控制</p>
             <p class="descript_content">
             pushWindow在示例中均推入了本身页面， popTo只能退回到本Session内的页面，popWindow无Session限制
             </p>
             
             <button class="jsapiButton" onclick="jsapi_call('pushWindow', {url:window.location.href})">pushWindow</button>
-            <button class="jsapiButton" onclick="jsapi_call('pushWindow', {
-                // 要打开页面的 URL
-                url: window.location.href,
-                // 打开页面的配置参数
+            <button class="jsapiButton" onclick="jsapi_call('pushWindow', {url:window.location.href,
                 param: {
-                readTitle: true,    //自动读取 title
-                showOptionMenu: false,    // 隐藏右边菜单
+                username: 'xxxxx',
+                password: 'aaaaaa',
                 },
-                // 用于给新开的页面传递参数，可选
-                // 在新开的页面使用 AlipayJSBridge.startupParams 可以获取到 passData
                 passData: {
-                key1: 'key1Value',
-                key2: 'key2Value'
+                username: 'xxxxx',
+                password: 'aaaaaa',
                 }
                 })">pushWindow 自定义参数</button>
             <button class="jsapiButton" onclick="jsapi_call('popWindow')">popWindow</button>
@@ -86,7 +62,7 @@
             <button class="jsapiButton" onclick="jsapi_call('startApp', {appId:'90000000', param:{showOptionMenu:'NO'}})">startApp</button>
             <button class="jsapiButton" onclick="jsapi_call('startH5App', {appId:'90000000', param:{showOptionMenu:'NO'}})">startH5App</button>
             <button class="jsapiButton" onclick="jsapi_call('exitApp')">exitApp</button>
-
+            
             <p class="descript_title">导航栏背景与标题</p>
             <button class="jsapiButton" onclick="jsapi_call('showTitlebar')">showTitlebar</button>
             <button class="jsapiButton" onclick="jsapi_call('hideTitlebar')">hideTitlebar</button>
@@ -95,7 +71,7 @@
             <button class="jsapiButton" onclick="jsapi_call('setTitle',{'title':'新标题','subtitle':'副标题'})">setTitle</button>
             <button class="jsapiButton" onclick="jsapi_call('showTitleLoading')">showTitleLoading</button>
             <button class="jsapiButton" onclick="jsapi_call('hideTitleLoading')">hideTitleLoading</button>
-
+            
             <p class="descript_title">导航栏右侧按钮</p>
             <button class="jsapiButton" onclick="jsapi_call('setOptionMenu',{
                 title : '按钮',
@@ -149,6 +125,7 @@
             <button class="jsapiButton" onclick="jsapi_call('rpc', {
                 operationType:'com.antcloud.request.post',
                 requestData:[{
+                password:'i7eqk255wjrzvdbj',
                 username:'beijing'
                 }],
                 headers:{}
@@ -168,7 +145,7 @@
                 dataType: 'none',
                 saveToGallery: true
                 })">截图</button>
-<!--            <button class="jsapiButton" onclick="jsapi_call('startShare')">分享</button>-->
+            <!--            <button class="jsapiButton" onclick="jsapi_call('startShare')">分享</button>-->
             <p class="descript_title">埋点</p>
             <button class="jsapiButton" onclick="jsapi_call('remoteLog', {
                 type:'behavior',
@@ -199,7 +176,9 @@
                 })">mtBizReport埋点</button>
             
             <p class="descript_title">自定义扩展JSApi测试</p>
-            <button class="jsapiButton" onclick="jsapi_call('openSms')">openSms</button>
+            <button class="jsapiButton" onclick="jsapi_call('myapi1')">openSms</button>
+            <button class="jsapiButton" onclick="jsapi_call('myapi2')">setDoubleTitle</button>
+            <button class="jsapiButton" onclick="jsapi_call('demoTest2')">demoTest2</button>
             
             <p class="descript_title">其它注意事项</p>
             <p class="descript_content">
@@ -209,15 +188,28 @@
             
             <script src="https://a.alipayobjects.com/g/h5-lib/bizlog/1.2.13/bizlog-browser.js"></script>
             <script type="text/javascript">
-            function get_startupParams() {
-                var params = AlipayJSBridge.startupParams;
-                alert('启动参数'+JSON.stringify(params));
-            }
-            
-            function jsapi_call(apiName, params) {
+                function jsapi_call(apiName, params) {
                     window.AlipayJSBridge && AlipayJSBridge.call(apiName, params, function(data) {alert('调用结果'+JSON.stringify(data));
                                                                  });
                 }
+            
+            function jsapi_call_storage() {
+                window.AlipayJSBridge && AlipayJSBridge.call('setAPDataStorage', {key:'hexi12306_1', value:JSON.stringify({'name':'hexi1'})}, function(data) {alert('调用结果'+JSON.stringify(data));
+                });
+                window.AlipayJSBridge && AlipayJSBridge.call('setAPDataStorage', {key:'hexi12306_2', value:JSON.stringify({'name':'hexi2'})}, function(data) {alert('调用结果'+JSON.stringify(data));
+                });
+                window.AlipayJSBridge && AlipayJSBridge.call('setAPDataStorage', {key:'hexi12306_3', value:JSON.stringify({'name':'hexi3'})}, function(data) {alert('调用结果'+JSON.stringify(data));
+                });
+                window.AlipayJSBridge && AlipayJSBridge.call('setAPDataStorage', {key:'hexi12306_4', value:JSON.stringify({'name':'hexi4'})}, function(data) {alert('调用结果'+JSON.stringify(data));
+                });
+
+                setTimeout(function(){
+
+                　　AlipayJSBridge.call('getAPDataStorage', {key:'hexi12306_3'}, function(data) {alert('调用结果'+JSON.stringify(data));
+                   });
+
+                },2000);　　　　//延时2秒
+            }
             
             function jsapi_call_showLoading() {
                 window.AlipayJSBridge && AlipayJSBridge.call('showLoading');
@@ -270,12 +262,16 @@
                                       }
                                       }, false);
                                       
-            document.addEventListener('resume', function (event) {
+                                      document.addEventListener('resume', function (event) {
                                                                 alert('页面回退时带过来的内容： ' + JSON.stringify(event.data));
                                                                 });
-            
-            
-            
+                                                    
+            document.addEventListener('nativeEvent', function (e) {
+                                      alert('nativeEvent带过来的内容： ' + JSON.stringify(e));
+            }, false);
+                                                                
+                                                                
+                                                                
                 </script>
             </body>
 </html>

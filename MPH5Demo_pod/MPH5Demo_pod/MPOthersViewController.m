@@ -41,6 +41,11 @@
     [self.view addSubview:button2];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 - (void)customNavigatorBar
 {
     MPNavigatorDemoVC *vc = [MPNavigatorDemoVC new];

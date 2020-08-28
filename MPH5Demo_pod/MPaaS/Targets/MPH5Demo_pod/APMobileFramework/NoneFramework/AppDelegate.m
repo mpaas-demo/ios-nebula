@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "TestDemoViewController.h"
+#import "MPTabBarController.h"
 
 @interface AppDelegate ()
 
@@ -23,11 +23,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = [[DFNavigationController alloc] initWithRootViewController:[[TestDemoViewController alloc]init]];
-    self.navigationController = self.window.rootViewController;
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    MPTabBarController *tabBarController = [[MPTabBarController alloc]init];
+    [self.window setRootViewController:tabBarController];
     [self.window makeKeyAndVisible];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.navigationController = tabBarController.selectedViewController;
+    
+//    UINavigationController *rootvc =  [[UINavigationController alloc] initWithRootViewController:tabBarController];
+//    [self.window setRootViewController:rootvc];
+//    self.navigationController = rootvc;
     
     // navigationcontroller创建完成后，启动 mPaaS 框架
     [[DTFrameworkInterface sharedInstance] manualInitMpaasFrameworkWithApplication:application launchOptions:launchOptions];
