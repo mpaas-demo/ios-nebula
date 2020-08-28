@@ -1,1 +1,74 @@
-!function(e){var t,n=document.querySelector('meta[name="alipay-autosave-webimage"]');n&&"disable"===n.content||e.H5SAVEWEBIMAGEINITED||(t=function(){var t=0;document&&document.body&&document.body.addEventListener("touchstart",function(n){var a=n.target;if("img"===a.nodeName.toLowerCase()){a.style.webkitUserSelect="none",t=e.setTimeout(function(){o(a,"click",function(e){return e.preventDefault(),!1}),function(){var t=arguments,n=function(){e.AlipayJSBridge.call.apply(null,t)};e.AlipayJSBridge?n():document.addEventListener("AlipayJSBridgeReady",n,!1)}("privateSaveImage",{src:a.src})},750);o(document.body,"touchmove touchend touchcancel",function(){e.clearTimeout(t)})}},!1)},/complete|loaded|interactive/.test(document.readyState)?setTimeout(function(){t()},1):document.defaultView.addEventListener("DOMContentLoaded",function(){t()},!1),e.H5SAVEWEBIMAGEINITED=!0);function o(e,t,n){for(var o=t.split(" "),a=function(t){for(var i=0;i<o.length;i++)e.removeEventListener(o[i],a,!0);n&&n(t)},i=0;i<o.length;i++)e.addEventListener(o[i],a,!0)}}(window);
+(function (window) {
+    var meta = document.querySelector('meta[name="alipay-autosave-webimage"]');
+	if(meta && meta.content === "disable" || window.H5SAVEWEBIMAGEINITED){
+        return;
+	}
+ 
+    function call() {
+        var a = arguments,
+            fn = function () {
+                window.AlipayJSBridge.call.apply(null, a);
+            };
+
+        window.AlipayJSBridge ? fn() : document.addEventListener('AlipayJSBridgeReady', fn, false);
+    }
+
+    function onceEvent(ele, name, cb) {
+        var events = name.split(" ");
+
+        var handle = function (e) {
+            for (var i = 0; i < events.length; i++) {
+                ele.removeEventListener(events[i], handle, true);
+            }
+            cb && cb(e);
+        };
+        for (var i = 0; i < events.length; i++) {
+            ele.addEventListener(events[i], handle, true);
+        }
+    }
+
+    function onDOMReady(callback) {
+        var readyRE = /complete|loaded|interactive/;
+        if (readyRE.test(document.readyState)) {
+            setTimeout(function() {
+                       callback();
+                       }, 1);
+        } else {
+            document.defaultView.addEventListener('DOMContentLoaded', function () {
+                callback();
+            }, false);
+        }
+    }
+
+    onDOMReady(function(){
+        var timeoutId = 0;
+        if (document && document.body) {
+            document.body.addEventListener("touchstart", function (e) {
+                var imgElement = e.target;
+                if (imgElement.nodeName.toLowerCase() === 'img') {
+                    imgElement.style.webkitUserSelect = 'none';
+                    timeoutId = window.setTimeout(function () {
+                       onceEvent(imgElement, "click", function (ev) {
+                           ev.preventDefault();
+                           return false;
+                       });
+                        call('privateSaveImage', {
+                            src: imgElement.src
+                        });
+                    }, 750);
+                                      
+                    var clearHandle = function () {
+                      window.clearTimeout(timeoutId);
+                    };
+                    onceEvent(document.body, "touchmove touchend touchcancel", clearHandle);
+                }
+            }, false);
+        }
+    });
+
+
+    window.H5SAVEWEBIMAGEINITED = true;
+})(window);
+
+
+

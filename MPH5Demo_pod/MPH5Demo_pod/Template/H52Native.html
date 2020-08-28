@@ -176,7 +176,9 @@
                 })">mtBizReport埋点</button>
             
             <p class="descript_title">自定义扩展JSApi测试</p>
-            <button class="jsapiButton" onclick="jsapi_call('openSms')">openSms</button>
+            <button class="jsapiButton" onclick="jsapi_call('myapi1')">openSms</button>
+            <button class="jsapiButton" onclick="jsapi_call('myapi2')">setDoubleTitle</button>
+            <button class="jsapiButton" onclick="jsapi_call('demoTest2')">demoTest2</button>
             
             <p class="descript_title">其它注意事项</p>
             <p class="descript_content">
@@ -190,6 +192,24 @@
                     window.AlipayJSBridge && AlipayJSBridge.call(apiName, params, function(data) {alert('调用结果'+JSON.stringify(data));
                                                                  });
                 }
+            
+            function jsapi_call_storage() {
+                window.AlipayJSBridge && AlipayJSBridge.call('setAPDataStorage', {key:'hexi12306_1', value:JSON.stringify({'name':'hexi1'})}, function(data) {alert('调用结果'+JSON.stringify(data));
+                });
+                window.AlipayJSBridge && AlipayJSBridge.call('setAPDataStorage', {key:'hexi12306_2', value:JSON.stringify({'name':'hexi2'})}, function(data) {alert('调用结果'+JSON.stringify(data));
+                });
+                window.AlipayJSBridge && AlipayJSBridge.call('setAPDataStorage', {key:'hexi12306_3', value:JSON.stringify({'name':'hexi3'})}, function(data) {alert('调用结果'+JSON.stringify(data));
+                });
+                window.AlipayJSBridge && AlipayJSBridge.call('setAPDataStorage', {key:'hexi12306_4', value:JSON.stringify({'name':'hexi4'})}, function(data) {alert('调用结果'+JSON.stringify(data));
+                });
+
+                setTimeout(function(){
+
+                　　AlipayJSBridge.call('getAPDataStorage', {key:'hexi12306_3'}, function(data) {alert('调用结果'+JSON.stringify(data));
+                   });
+
+                },2000);　　　　//延时2秒
+            }
             
             function jsapi_call_showLoading() {
                 window.AlipayJSBridge && AlipayJSBridge.call('showLoading');
@@ -245,6 +265,10 @@
                                       document.addEventListener('resume', function (event) {
                                                                 alert('页面回退时带过来的内容： ' + JSON.stringify(event.data));
                                                                 });
+                                                    
+            document.addEventListener('nativeEvent', function (e) {
+                                      alert('nativeEvent带过来的内容： ' + JSON.stringify(e));
+            }, false);
                                                                 
                                                                 
                                                                 

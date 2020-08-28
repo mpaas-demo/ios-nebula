@@ -2332,7 +2332,7 @@
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>MTNPPlugin4SessionUrl</string>
+				<string>MPNPPlugin4SessionUrl</string>
 				<key>scope</key>
 				<string>service</string>
 				<key>events</key>

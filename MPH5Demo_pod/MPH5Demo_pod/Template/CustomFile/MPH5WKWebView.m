@@ -10,4 +10,8 @@
 
 @implementation MPH5WKWebView
 
+- (instancetype)initWithFrame:(CGRect)frame configuration:(WKWebViewConfiguration *)configuration
+{
+    return [super initWithFrame:frame configuration:configuration];
+}
 @end

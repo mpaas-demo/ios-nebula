@@ -17,6 +17,7 @@
     // -- 拦截调用的jsapi信息
     [self.target addEventListener:kEvent_Invocation_Event_Start withListener:self useCapture:NO];
     [self.target addEventListener:kEvent_Invocation_Invoke withListener:self useCapture:NO];
+    [self.target addEventListener:kEvent_Invocation_Complete withListener:self useCapture:NO];
     
     // -- 拦截H5页面请求事件
     [self.target addEventListener:kEvent_Proxy_Request_Start_Handler withListener:self useCapture:NO];
@@ -36,6 +37,12 @@
             NSLog(@"[jsapi param: %@]", invocationEvent.invocationData);
         }
         
+    }else if ([kEvent_Invocation_Complete isEqualToString:event.eventType]){
+       PSDInvocationEvent *invocationEvent = (PSDInvocationEvent *)event;
+        NSString *apiName = invocationEvent.invocationName;
+        if ([apiName isEqualToString:@"setOptionMenu"]) {
+            NSLog(@"[jsapi param: %@]", invocationEvent.invocationData);
+        }
     }else if ([kEvent_Proxy_Request_Start_Handler isEqualToString:event.eventType]
               && [event isKindOfClass:[PSDProxyEvent class]] ){
         // 离线包走fallback，且fallbackurl地址为空时，直接跳转到默认错误页

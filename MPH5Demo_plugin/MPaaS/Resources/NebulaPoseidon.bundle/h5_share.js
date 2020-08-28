@@ -1,1 +1,387 @@
-window.AlipayH5Share&&!window.AlipayCallFromJS||function(){var e,t={},n={title:"",imgUrl:"",link:"",desc:"",fromMeta:!1,ready:!1},i={title:!1,link:!1,imgUrl:!1,desc:!1},r={init:function(e){var t=this;t.strict=void 0===e||!!e,t.collectLink(),t.collectTitle(),t.collectDesc(),t.collectThumbnail()},collectLink:function(){var e=document.querySelector('meta[name="Alipay:link"]');e&&e.getAttribute("content")&&(n.fromMeta=!0,n.link=e.getAttribute("content")),i.link=!0,this.collectReady()},collectTitle:function(){var e=this,t=document.querySelector('meta[name="Alipay:title"]');if(t&&t.getAttribute("content"))i.title=!0,n.title=t.getAttribute("content"),n.fromMeta=!0,e.collectReady();else if("mp.weixin.qq.com"===window.location.hostname&&"undefined"!=typeof msg_title&&msg_title)i.title=!0,n.title=e.htmlDecode(msg_title),e.collectReady();else if(document.title&&""!==document.title.trim())n.title=e.contentTidy(document.title),i.title=!0,e.collectReady();else if(document.getElementsByTagName("H1").length>0&&document.getElementsByTagName("H1")[0].textContent.length>0){var r=e.nodeStrFliter(document.getElementsByTagName("H1")[0]);e.getStrLen(r)<=64&&r.length>0&&(n.title=r,i.title=!0,e.collectReady())}},collectThumbnail:function(){var t=this,r=document.querySelector('meta[name="Alipay:imgUrl"]');if(r&&r.getAttribute("content"))i.imgUrl=!0,n.imgUrl=t.getAbsoluteUrl(r.getAttribute("content")),n.fromMeta=!0,t.collectReady();else if("mp.weixin.qq.com"===window.location.hostname&&"undefined"!=typeof msg_cdn_url&&msg_cdn_url.match(/^http(s?):\/\/.*$/g))i.imgUrl=!0,n.imgUrl=msg_cdn_url,t.collectReady();else if(i.imgUrl=!1,t.collectReady(),e=Array.prototype.slice.call(document.images),t.findImgUrl(1e4,128e4),t.strict||(""==n.imgUrl&&t.findImgUrl(2500,1e4),""==n.imgUrl&&t.findImgUrl(1024,2500)),""==n.imgUrl){var l=document.querySelector('link[type="image/x-icon"]');l&&l.getAttribute("href")&&(i.imgUrl=!0,n.imgUrl=t.getAbsoluteUrl(l.getAttribute("href")),t.collectReady())}},findImgUrl:function(t,l){var o=r;if(0===e.length)return i.imgUrl=!0,void o.collectReady();var c=99999,d=99999;if(e.length>0&&!i.imgUrl)for(var a=0;a<e.length;a++){var u=e[a];o.isHidden(u)||(o.isBanner(u)||o.isBase64(u)||(u.complete||u.natureWidth)&&u.naturalHeight*u.naturalWidth>=t&&u.naturalHeight*u.naturalWidth<l&&(u.y>60&&u.y<c||u.y<=60&&u.y>c||u.y===c&&u.x<d)&&(n.imgUrl=u.src,c=u.y||0,d=u.x||0,i.imgUrl=!0,o.collectReady()))}},collectDesc:function(){var e=this,t=document.querySelector('meta[name="Alipay:desc"]');if(t&&t.getAttribute("content")&&(i.desc=!0,n.desc=t.getAttribute("content"),n.fromMeta=!0,e.collectReady()),!i.desc&&"mp.weixin.qq.com"===window.location.hostname&&"undefined"!=typeof msg_desc&&msg_desc&&(i.desc=!0,n.desc=e.htmlDecode(msg_desc),e.collectReady()),i.desc||e.tarvelPtags(50,2e3),i.desc||e.tarvelPtags(20,50),i.desc||e.travelDocument(document.body,50,2e3),!i.desc){var r=document.querySelector('meta[name="description"]');r&&r.getAttribute("content")&&(n.desc=e.contentTidy(r.getAttribute("content")),n.fromMeta=!0,i.desc=!0,e.collectReady())}if(e.strict||(i.desc||e.travelDocument(document.body,20,50),i.desc||e.tarvelPtags(10,20),i.desc||e.travelDocument(document.body,10,20)),!i.desc){var l=window.location.hostname;void 0!=l&&""!=l&&(n.desc=l,i.desc=!0,e.collectReady())}var o=window.location.href,c=n.desc?n.desc:"",d=280-e.getStrLen(o);d<=e.getStrLen(c)&&d>=0&&(c=e.cutStr(c,Math.floor(d/2))),n.desc=c},collectReady:function(){i.title&&i.imgUrl&&i.link&&i.desc&&(n.ready=!0)},tarvelPtags:function(e,t){var r=this,l=Array.prototype.slice.call(document.getElementsByTagName("P"));if(l.length>0)for(var o=0;o<l.length;o++){var c=l[o];if(void 0!==c&&("Debug"!=c.id&&!r.isHidden(c))){var d=c.textContent;if(r.getStrLen(d)>=e&&r.getStrLen(d)<t&&(d=r.nodeStrFliter(c,!1)),r.getStrLen(d)>=e&&r.getStrLen(d)<t&&(n.desc=d,i.desc=!0,r.collectReady()),i.desc)break}}},travelDocument:function(e,t,r){if(void 0!=e&&e.hasChildNodes()){var l=this,o=e.childNodes;if(o&&o.length>0)for(var c=0;c<o.length;c++){var d=o[c];if(void 0!==d){switch(d.nodeType){case 1:l.isHidden(d)||"P"!=d.nodeName&&"SCRIPT"!=d.nodeName&&"STYLE"!=d.nodeName&&"AUDIO"!=d.nodeName&&"VIDEO"!=d.nodeName&&l.travelDocument(d,t,r);break;case 3:var a=d.nodeValue;l.getStrLen(a)>=t&&l.getStrLen(a)<r&&(a=l.contentTidy(a)),l.getStrLen(a)>=t&&l.getStrLen(a)<=r&&(n.desc=a,i.desc=!0,l.collectReady())}if(i.desc)break}}}},getStrLen:function(e){return e.replace(/[^\x00-\xff]/g,"xx").length},cutStr:function(e,t){for(var n=0,i=0;i<e.length;i++){var r=e.charAt(i);if(encodeURI(r).length>2?n+=1:n+=.5,n>=t){var l=n==t?i+1:i;return e.substr(0,l)}}},getAbsoluteUrl:function(e){var t=document.createElement("A");return t.href=e,e=t.href},getCurrentStyle:function(e,t){return window.getComputedStyle?window.getComputedStyle(e,null).getPropertyValue(t):e.currentStyle?e.currentStyle[t]:null},isHidden:function(e){var t=r;return!!(void 0!=e&&void 0!=e.nodeType&&"1"==e.nodeType&&("none"==t.getCurrentStyle(e,"display")||"hidden"==t.getCurrentStyle(e,"visibility")))||void 0!=e.parentNode&&t.isHidden(e.parentNode)},isBanner:function(e){var t=r;return!!(void 0!=e&&void 0!=e.nodeType&&"1"==e.nodeType&&t.matchKeyword([e.className,e.id],["banner","baner"]))||void 0!=e.parentNode&&t.isBanner(e.parentNode)},isBase64:function(e){var t=r;return!!(void 0!=e&&void 0!=e.nodeType&&"1"==e.nodeType&&0!==e.src.indexOf("http"))||void 0!=e.parentNode&&t.isBanner(e.parentNode)},matchKeyword:function(e,t){e=e||[],t=t||[];for(var n=0;n<e.length;n++)for(var i=0;i<t.length;i++)if((e[n]||"").indexOf(t[i])>-1)return!0;return!1},getType:function(e){return Object.prototype.toString.call(e).replace(/\[object (\w+)\]/,"$1").toLowerCase()},htmlDecode:function(e){var t=document.createElement("div");return t.innerHTML=e,t.innerText||t.textContent},nodeStrFliter:function(e,t){t=t||!0;var n=e.cloneNode(!0);return t&&Array.prototype.forEach.call(n.querySelectorAll("img[alt]"),function(e){e.parentNode.replaceChild(document.createTextNode(e.alt),e)}),Array.prototype.forEach.call(n.querySelectorAll("script,style,link"),function(e){e.parentNode.replaceChild(document.createTextNode(""),e)}),n=this.contentTidy(n.textContent)},contentTidy:function(e){return e.replace(/\s{4}/g," ").replace(/(\r|\n)/g,"").trim()}};t.getShareContent=function(e){return e=void 0===e||!!e,r.init(e),JSON.stringify(n)},document.addEventListener("JSPlugin_AlipayH5Share",function(e){var t=void 0===e.strict||!!e.strict;window.AlipayJSBridge&&e.clientId&&(r.init(t),window.AlipayJSBridge&&e.clientId&&setTimeout(function(){r.init(t),AlipayJSBridge.callback(e.clientId,n)},0),AlipayJSBridge.callback(e.clientId,n))}),window.AlipayH5Share=t}();
+(window.AlipayH5Share && !window.AlipayCallFromJS) || (function() {
+  var AlipayH5Share = {};
+  var shareMessage = {
+    title: "",
+    imgUrl: "",
+    link:"",
+    desc: "",
+    fromMeta: false,
+    ready: false
+  };
+  var collectReadyState = {
+    title: false,
+    link:false,
+    imgUrl: false,
+    desc: false
+  };
+
+  var imgArr;
+  var H5ShareCollector = {
+    init: function(strict) {
+      var t = this;
+      t.strict = (typeof strict ==='undefined')?true:(!!strict);
+      t.collectLink();
+      t.collectTitle();
+      t.collectDesc();
+      t.collectThumbnail();
+    },
+    collectLink:function(){
+      var t=this;
+      var metaLinkNode = document.querySelector('meta[name="Alipay:link"]');
+      if (metaLinkNode && metaLinkNode.getAttribute("content")) {
+        shareMessage.fromMeta = true;
+        shareMessage.link = metaLinkNode.getAttribute("content");
+      }
+      collectReadyState.link = true;
+      t.collectReady();
+    },
+    collectTitle: function() {
+      var t = this;
+      var metaTitleNode = document.querySelector('meta[name="Alipay:title"]');
+      if (metaTitleNode && metaTitleNode.getAttribute("content")) {
+        collectReadyState.title = true;
+        shareMessage.title = metaTitleNode.getAttribute("content");
+        shareMessage.fromMeta = true;
+        t.collectReady();
+      } else if(window.location.hostname==='mp.weixin.qq.com'  && typeof msg_title !== "undefined" && msg_title) {
+          collectReadyState.title = true;
+          shareMessage.title = t.htmlDecode(msg_title);
+          t.collectReady();
+      } else{
+        if (document.title && document.title.trim() !== "") {
+          shareMessage.title = t.contentTidy(document.title);
+          collectReadyState.title = true;
+          t.collectReady();
+        } else {
+          if (document.getElementsByTagName("H1").length > 0 && document.getElementsByTagName("H1")[0].textContent.length > 0) {
+            var tmpH1 = t.nodeStrFliter(document.getElementsByTagName("H1")[0]);
+            if (t.getStrLen(tmpH1) <= 64 && tmpH1.length > 0) {
+              shareMessage.title = tmpH1;
+              collectReadyState.title = true;
+              t.collectReady();
+            }
+          }
+        }
+      }
+    },
+    collectThumbnail: function() {
+      var t = this;
+      var metaImgNode = document.querySelector('meta[name="Alipay:imgUrl"]');
+      if (metaImgNode && metaImgNode.getAttribute("content")) {
+        collectReadyState.imgUrl = true;
+        shareMessage.imgUrl = t.getAbsoluteUrl(metaImgNode.getAttribute("content"));
+        shareMessage.fromMeta = true;
+        t.collectReady();
+      } else if(window.location.hostname==='mp.weixin.qq.com'  && typeof msg_cdn_url !== "undefined"  && msg_cdn_url.match(/^http(s?):\/\/.*$/g)) {
+        collectReadyState.imgUrl = true;
+        shareMessage.imgUrl = msg_cdn_url;
+        t.collectReady();
+      } else {
+        collectReadyState.imgUrl = false;
+        t.collectReady();
+        imgArr = Array.prototype.slice.call(document.images);
+        t.findImgUrl(200*50,2000*640);
+        if(!t.strict){
+          if(shareMessage.imgUrl == ''){
+            t.findImgUrl(100*25,200*50);
+          }
+          if(shareMessage.imgUrl == ''){
+            t.findImgUrl(32*32,100*25);
+          }
+        }
+        if(shareMessage.imgUrl == ''){
+          var iconImgNode = document.querySelector('link[type="image/x-icon"]');
+          if (iconImgNode && iconImgNode.getAttribute("href")) {
+            collectReadyState.imgUrl = true;
+            shareMessage.imgUrl = t.getAbsoluteUrl(iconImgNode.getAttribute("href"));
+            t.collectReady();
+          }
+        }
+      }
+    },
+    findImgUrl: function(min,max) {
+      var t = H5ShareCollector;
+      if (imgArr.length === 0) {
+        collectReadyState.imgUrl = true;
+        t.collectReady();
+        return;
+      }
+      var imgYAxis = 99999;
+      var imgXAxis = 99999;
+      if (imgArr.length > 0 && !collectReadyState.imgUrl) {
+        for (var i = 0; i < imgArr.length; i++) {
+          var curImg = imgArr[i];
+          if(t.isHidden(curImg)){
+            continue;
+          }
+          if(t.isBanner(curImg)){
+            continue;
+          }
+          if(t.isBase64(curImg)){
+            continue;
+          }
+          if (curImg.complete || curImg.natureWidth) {
+            if ((curImg.naturalHeight * curImg.naturalWidth >= min && curImg.naturalHeight * curImg.naturalWidth < max)) {
+              if ((curImg.y > 60 && curImg.y <imgYAxis) || (curImg.y <= 60 && curImg.y >imgYAxis) || (curImg.y ===imgYAxis && curImg.x <imgXAxis)) {
+                shareMessage.imgUrl = curImg.src;
+                imgYAxis = curImg.y || 0;
+                imgXAxis = curImg.x || 0;
+                collectReadyState.imgUrl = true;
+                t.collectReady();
+              }
+            }
+          }
+        }
+      }
+
+    },
+    collectDesc: function() {
+      var t = this;
+      var metaDescNode = document.querySelector('meta[name="Alipay:desc"]');
+      if (metaDescNode && metaDescNode.getAttribute("content")) {
+        collectReadyState.desc = true;
+        shareMessage.desc = metaDescNode.getAttribute("content");
+        shareMessage.fromMeta = true;
+        t.collectReady();
+      }
+
+      if(!collectReadyState.desc && window.location.hostname==='mp.weixin.qq.com' && typeof msg_desc !== "undefined" && msg_desc) {
+        collectReadyState.desc = true;
+        shareMessage.desc = t.htmlDecode(msg_desc);
+        t.collectReady();
+      }
+
+      if (!collectReadyState.desc) {
+        t.tarvelPtags(50,2000);
+      }
+      if (!collectReadyState.desc) {
+        t.tarvelPtags(20,50);
+      }
+      if (!collectReadyState.desc) {
+        t.travelDocument(document.body,50,2000);
+      }
+      if (!collectReadyState.desc) {
+        var descNode = document.querySelector('meta[name="description"]');
+        if (descNode && descNode.getAttribute("content")) {
+          shareMessage.desc = t.contentTidy(descNode.getAttribute("content"));
+          shareMessage.fromMeta = true;
+          collectReadyState.desc = true;
+          t.collectReady();
+        }
+      }
+      if(!t.strict){
+        if (!collectReadyState.desc) {
+          t.travelDocument(document.body,20,50);
+        }
+        if (!collectReadyState.desc) {
+          t.tarvelPtags(10,20);
+        }
+        if (!collectReadyState.desc) {
+          t.travelDocument(document.body,10,20);
+        }
+      }
+      if (!collectReadyState.desc){
+        var hostDesc = window.location.hostname;
+        if(hostDesc != undefined && hostDesc != ''){
+          shareMessage.desc = hostDesc;
+          collectReadyState.desc = true;
+          t.collectReady();
+        }
+      }
+      var shareHref=window.location.href;
+      var shareDesc = shareMessage.desc?shareMessage.desc:'';
+      var shareLeaveLength= 280 - t.getStrLen(shareHref);
+      // 如果剩余长度，大于摘要长度，则截取摘要
+      if(shareLeaveLength <= t.getStrLen(shareDesc) && shareLeaveLength>=0){
+        shareDesc = t.cutStr(shareDesc,Math.floor(shareLeaveLength/2));
+      }
+      shareMessage.desc = shareDesc;
+    },
+    collectReady: function() {
+      if (collectReadyState.title && collectReadyState.imgUrl  && collectReadyState.link && collectReadyState.desc) {
+        shareMessage.ready = true;
+      }
+    },
+    tarvelPtags:function(min,max){
+      var t=this;
+      var pArr = Array.prototype.slice.call(document.getElementsByTagName("P"));
+      if (pArr.length > 0) {
+        for (var i = 0; i < pArr.length; i++) {
+          var c=pArr[i];
+          if(typeof c ==='undefined'){
+            continue;
+          }
+          if (c.id == "Debug") {
+            continue;
+          }
+          if(t.isHidden(c)){
+            continue;
+          }
+          var pConetent=c.textContent;
+          if (t.getStrLen(pConetent) >= min && t.getStrLen(pConetent) < max) {
+            pConetent = t.nodeStrFliter(c, false);
+          }
+          if (t.getStrLen(pConetent) >= min && t.getStrLen(pConetent) < max) {
+            shareMessage.desc = pConetent;
+            collectReadyState.desc = true;
+            t.collectReady();
+          }
+          if(collectReadyState.desc){
+            break;
+          }
+        }
+      }
+    },
+    travelDocument: function(el,min,max) {
+      if(el !=undefined && el.hasChildNodes()){
+        var t = this,
+          childNodes = el.childNodes;
+        if (childNodes && childNodes.length > 0) {
+          for (var i = 0; i < childNodes.length; i++) {
+            var c = childNodes[i];
+            if(typeof c ==='undefined'){
+              continue;
+            }
+            switch (c.nodeType) {
+              case 1:
+                if(!t.isHidden(c)){
+                  if (c.nodeName != "P" && c.nodeName != "SCRIPT" && c.nodeName != "STYLE" && c.nodeName != "AUDIO" && c.nodeName != "VIDEO") {
+                    t.travelDocument(c,min,max);
+                  }
+                }
+                break;
+              case 3:
+                var tmp = c.nodeValue;
+                if (t.getStrLen(tmp) >= min && t.getStrLen(tmp) < max) {
+                  tmp = t.contentTidy(tmp);
+                }
+                if (t.getStrLen(tmp) >= min && t.getStrLen(tmp) <= max) {
+                  shareMessage.desc = tmp;
+                  collectReadyState.desc = true;
+                  t.collectReady();
+                }
+                break;
+            }
+            if (collectReadyState.desc) {
+              break;
+            }
+          }
+        }
+      }
+    },
+    getStrLen: function(str) {
+      return str.replace(/[^\x00-\xff]/g, "xx").length;
+    },
+    cutStr:function(str, len){
+      var char_length = 0;
+      for (var i = 0; i < str.length; i++){
+        var son_str = str.charAt(i);
+        encodeURI(son_str).length > 2 ? char_length += 1 : char_length += 0.5;
+        if (char_length >= len){
+          var sub_len = char_length == len ? i+1 : i;
+          return str.substr(0, sub_len);
+          break;
+        }
+      }
+    },
+    getAbsoluteUrl:function (url) {
+      var a = document.createElement('A');
+      a.href = url;  // 设置相对路径给Image, 此时会发送出请求
+      url = a.href;  // 此时相对路径已经变成绝对路径
+      return url;
+    },
+    getCurrentStyle:function(obj, prop) {
+      if (window.getComputedStyle) {
+        return window.getComputedStyle(obj,null).getPropertyValue(prop);
+      }else if (obj.currentStyle) {
+        return obj.currentStyle[prop];
+      }
+      return null;
+    },
+    isHidden:function(el){
+      var t = H5ShareCollector;
+      var isHidden =  ( el != undefined && el.nodeType != undefined && el.nodeType == '1') && (t.getCurrentStyle(el,'display')=='none' || t.getCurrentStyle(el,'visibility')=='hidden');
+      if(isHidden){
+        return true;
+      }else{
+        return el.parentNode != undefined ?t.isHidden(el.parentNode):false;
+      }
+    },
+    isBanner:function(el){
+      var t = H5ShareCollector;
+      var isBanner =  ( el != undefined && el.nodeType != undefined && el.nodeType == '1') && t.matchKeyword([el.className,el.id],['banner','baner']);
+      if(isBanner){
+        return true;
+      }else{
+        return el.parentNode != undefined ?t.isBanner(el.parentNode):false;
+      }
+    },
+    isBase64:function(el){
+      var t = H5ShareCollector;
+      var isBase64 =  ( el != undefined && el.nodeType != undefined && el.nodeType == '1') && el.src.indexOf("http")!== 0;
+      if(isBase64){
+        return true;
+      }else{
+        return el.parentNode != undefined ?t.isBanner(el.parentNode):false;
+      }
+    },
+    matchKeyword:function(srcArr,targetArr){
+      srcArr = srcArr || [];
+      targetArr = targetArr || [];
+      for(var i=0;i<srcArr.length;i++){
+        for(var j=0;j<targetArr.length;j++){
+          if ((srcArr[i] || '').indexOf(targetArr[j])>-1) {
+            return true;
+            break;
+          }
+        }
+      }
+      return false;
+    },
+    getType:function(obj) {
+      return Object.prototype.toString.call(obj).replace(/\[object (\w+)\]/, '$1').toLowerCase();
+    },
+    htmlDecode: function(str) {
+      var t = document.createElement("div");
+      t.innerHTML = str;
+      return t.innerText || t.textContent
+    },
+    nodeStrFliter: function(element, imgAlt) {
+      imgAlt = imgAlt || true;
+      var t = this,
+        tmp = element.cloneNode(true);
+      if (imgAlt) {
+        Array.prototype.forEach.call(tmp.querySelectorAll("img[alt]"), function(el) {
+          el.parentNode.replaceChild(document.createTextNode(el.alt), el);
+        });
+      }
+      Array.prototype.forEach.call(tmp.querySelectorAll("script,style,link"), function(el) {
+        el.parentNode.replaceChild(document.createTextNode(""), el);
+      });
+      tmp = t.contentTidy(tmp.textContent);
+      return tmp;
+    },
+    contentTidy: function(str) {
+      return str.replace(/\s{4}/g, " ").replace(/(\r|\n)/g, "").trim();
+    }
+  };
+  AlipayH5Share.getShareContent = function(strict) {
+    strict = (typeof strict ==='undefined')?true:(!!strict);
+    H5ShareCollector.init(strict);
+    return JSON.stringify(shareMessage);
+  };
+    document.addEventListener("JSPlugin_AlipayH5Share", function(e) {
+        var strict = (typeof e.strict ==='undefined')?true:(!!e.strict);
+        if (window.AlipayJSBridge && e.clientId) {
+            H5ShareCollector.init(strict);
+            if (window.AlipayJSBridge && e.clientId) {
+                setTimeout(function(){
+                    H5ShareCollector.init(strict);
+                    AlipayJSBridge.callback(e.clientId, shareMessage);
+                },0);
+            }
+            AlipayJSBridge.callback(e.clientId, shareMessage);
+        }
+    });
+    window.AlipayH5Share = AlipayH5Share;
+})();

@@ -1225,6 +1225,21 @@
 					</dict>
 				</array>
 			</dict>
+			<dict>
+				<key>name</key>
+				<string>NBNPlugin4FirstLoadRequest</string>
+				<key>scope</key>
+				<string>scene</string>
+				<key>events</key>
+				<array>
+					<dict>
+						<key>name</key>
+						<string>-</string>
+						<key>useCapture</key>
+						<false/>
+					</dict>
+				</array>
+			</dict>
 		</array>
 	</dict>
 	<key>ComponentRuntime</key>

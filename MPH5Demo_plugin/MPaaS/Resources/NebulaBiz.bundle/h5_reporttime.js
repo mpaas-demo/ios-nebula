@@ -1,1 +1,23 @@
-!function(){var t;window.NEBULAHASADDEDTOUCHEVENT||(t=function(){document.addEventListener("touchstart",function(t){AlipayJSBridge.call("reportClickTime")},!1)},/complete|loaded|interactive/.test(document.readyState)?setTimeout(function(){t()},1):document.defaultView.addEventListener("DOMContentLoaded",function(){t()},!1),window.NEBULAHASADDEDTOUCHEVENT=!0)}();
+(function(){
+	if (window.NEBULAHASADDEDTOUCHEVENT) {
+		return;
+	};
+	function onDOMReady(callback){
+	 	var readyRE = /complete|loaded|interactive/;
+	 	 if(readyRE.test(document.readyState)) {
+			 setTimeout(function() {
+			            callback();
+			            }, 1);
+		 } else {
+		 	document.defaultView.addEventListener('DOMContentLoaded', function () {
+		                                       callback();
+		                                       }, false);
+		 }
+	}
+ 	onDOMReady(function(){
+     		document.addEventListener("touchstart",function(event){
+                                      AlipayJSBridge.call("reportClickTime");
+                                      }, false);
+    });
+ 	window.NEBULAHASADDEDTOUCHEVENT = true;
+ })();

@@ -34,7 +34,7 @@
     
     if ([expandParams count] > 0) {
         [self customNavigationBarWithParams:expandParams];
-    }    
+    }
 }
 
 - (void)customNavigationBarWithParams:(NSDictionary *)expandParams
@@ -112,6 +112,27 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    if ([self.url.absoluteString containsString:@"H52Native"]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"sendEvent" style:UIBarButtonItemStylePlain target:self action:@selector(sendEventToH5)];
+    }
+}
+
+- (void)sendEventToH5
+{
+    // native向 H5 发送事件
+    [self callHandler:@"nativeEvent" data:@{@"key1":@"value1"} responseCallback:^(id responseData) {
+        
+    }];
+    
+}
+
+- (void)runJSFromNative
+{
+    // native 执行一段 JS
+    [self.psdContentView evaluateJavaScript:@"alert(\'run js from native\')" completionHandler:^(id  _Nonnull result, NSError * _Nonnull error) {
+
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

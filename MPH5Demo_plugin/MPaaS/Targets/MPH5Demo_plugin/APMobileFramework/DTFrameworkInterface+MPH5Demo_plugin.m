@@ -8,6 +8,7 @@
 
 #import "DTFrameworkInterface+MPH5Demo_plugin.h"
 #import "MPH5WebViewController.h"
+#import "MPH5WKWebView.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
@@ -21,7 +22,7 @@
 
 - (NSTimeInterval)logReportActiveMinInterval
 {
-    return 0;
+    return 1800;
 }
 
 - (BOOL)shouldLogStartupConsumption
@@ -50,7 +51,7 @@
     [MPRpcInterface initRpc];
     
     // 初始化容器
-//    [MPNebulaAdapterInterface initNebula];
+    //    [MPNebulaAdapterInterface initNebula];
     
     // 自定义jsapi路径和预置离线包信息
     NSString *presetApplistPath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"DemoCustomPresetApps.bundle/h5_json.json"] ofType:nil];
@@ -64,12 +65,14 @@
     #ifdef DEBUG
         NBLogConfigurationGet().enableConsoleLog = YES;
     #endif
-    
+
     // 定制容器
-    [MPNebulaAdapterInterface shareInstance].nebulaVeiwControllerClass = [MPH5WebViewController class];
-    [MPNebulaAdapterInterface shareInstance].nebulaNeedVerify = NO;
-    [MPNebulaAdapterInterface shareInstance].nebulaUserAgent = @"mPaaS/Portal";
-    [MPNebulaAdapterInterface shareInstance].nebulaCommonResourceAppList = @[@"77777777"];
+    [MPNebulaAdapterInterface shareInstance].nebulaVeiwControllerClass = [MPH5WebViewController class]; //设置H5容器基类
+    [MPNebulaAdapterInterface shareInstance].nebulaWebViewClass = [MPH5WKWebView class];
+    [MPNebulaAdapterInterface shareInstance].nebulaUserAgent = @"mPaaS/Portal";//设置H5容器UserAgent
+    [MPNebulaAdapterInterface shareInstance].nebulaUseWKArbitrary = YES; //开启 WKWebview
+    [MPNebulaAdapterInterface shareInstance].nebulaCommonResourceAppList = @[@"77777777"];// 设置全局资源包
+    [MPNebulaAdapterInterface shareInstance].nebulaNeedVerify = NO; // 关闭离线包验签，正式版本请开启验签
     
     // 更新离线包
     [[MPNebulaAdapterInterface shareInstance] requestAllNebulaApps:^(NSDictionary *data, NSError *error) {
